@@ -39,4 +39,4 @@
     #library,system,link_always "libpthread";
 }
 
-// main :: () {}
+main :: () {}
