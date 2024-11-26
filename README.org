@@ -2,11 +2,33 @@
 
 Jai bindings for SDL3. Work in progress.
 
-* SDL2 & 3 source
-- SDL2: https://github.com/libsdl-org/SDL/tree/release-2.30.9/include
-- SDL3: https://github.com/libsdl-org/SDL/tree/main/include/SDL3
+* SDL3 source
+- https://github.com/libsdl-org/SDL/tree/main/include/SDL3
+
+SDL3 build commands:
+#+begin_src
+git clone https://github.com/libsdl-org/SDL
+cd SDL
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSDL_STATIC=ON ..
+cmake --build . --config Release --parallel
+#+end_src
+
+SDL_image build commands (assuming SDL and SDL_image root are at same directory level):
+#+begin_src
+git clone https://github.com/libsdl-org/SDL
+cd SDL
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DSDL3_DIR=../SDL/build -DBUILD_SHARED_LIBS=ON
+cmake --build . --config Release
+cmake .. -DCMAKE_BUILD_TYPE=Release -DSDL3_DIR=../SDL/build -DBUILD_SHARED_LIBS=OFF
+cmake --build . --config Release
+#+end_src
 
 * Finished
+- SDL_image.jai
 - SDL_gpu.jai
 - SDL_timer.jai
 - SDL_rect.jai
