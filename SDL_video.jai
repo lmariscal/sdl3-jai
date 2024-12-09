@@ -187,7 +187,7 @@ SDL_GetWindowICCProfile          :: (window: *SDL_Window, size: *u64) -> *void  
 SDL_GetWindowPixelFormat         :: (window: *SDL_Window) -> SDL_PixelFormat              #foreign SDL3;
 SDL_GetWindows                   :: (count: *s32) -> **SDL_Window                         #foreign SDL3;
 
-SDL_CreateWindow                 :: (title: *u8, w: s32, h: s32, flags: SDL_WindowFlags) -> *SDL_Window #foreign SDL3;
+SDL_CreateWindow                 :: (title: *u8, w: s32, h: s32, flags: SDL_WindowFlags = 0) -> *SDL_Window #foreign SDL3;
 
 SDL_CreatePopupWindow            :: (parent: *SDL_Window, offset_x: s32, offset_y: s32, w: s32, h: s32, flags: SDL_WindowFlags) -> *SDL_Window #foreign SDL3;
 
