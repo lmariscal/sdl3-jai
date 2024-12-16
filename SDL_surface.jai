@@ -20,20 +20,20 @@ SDL_FlipMode :: enum u32
     SDL_FLIP_VERTICAL;
 }
 
-// SDL_Surface :: struct
-// {
-//     flags:    SDL_SurfaceFlags;
-//     format:   SDL_PixelFormat;
-//     w:        s32;
-//     h:        s32;
-//     pitch:    s32;
-//     pixels:   *void;
+SDL_Surface :: struct
+{
+    flags:    SDL_SurfaceFlags;
+    format:   SDL_PixelFormat;
+    w:        s32;
+    h:        s32;
+    pitch:    s32;
+    pixels:   *void;
 
-//     refcount: s32;
-//     reserved: *void;
-// }
+    refcount: s32;
+    reserved: *void;
+}
 
-SDL_Surface :: void;
+// SDL_Surface :: void;
 
 
 SDL_CreateSurface                :: (width: s32, height: s32, format: SDL_PixelFormat) -> *SDL_Surface  #foreign SDL3;
