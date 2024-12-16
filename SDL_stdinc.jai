@@ -13,6 +13,14 @@ SDL_fabsf :: (x: float32) -> float32 #foreign SDL3;
 SDL_sin :: (x: float64) -> float64 #foreign SDL3;
 SDL_sinf :: (x: float32) -> float32 #foreign SDL3;
 
+SDL_srand       :: (seed: u64)                  #foreign SDL3;
+SDL_rand        :: (n: s32) -> s32              #foreign SDL3;
+SDL_randf       :: () -> float32                #foreign SDL3;
+SDL_rand_bits   :: () -> u32                    #foreign SDL3;
+SDL_rand_r      :: (state: *u64, n: s32) -> s32 #foreign SDL3;
+SDL_randf_r     :: (state: *u64) -> float32     #foreign SDL3;
+SDL_rand_bits_r :: (state: *u64) -> u32         #foreign SDL3;
+
 SDL_FOURCC :: (a: u8, b: u8, c: u8, d: u8) -> u32
 {
     return ((cast(u32) a) << 0) | ((cast(u32) b) << 8) | ((cast(u32) c) << 16) | ((cast(u32) d) << 24);
