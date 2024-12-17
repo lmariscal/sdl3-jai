@@ -10,8 +10,10 @@ SDL_free :: (mem: *void) #foreign SDL3;
 
 SDL_fabsf :: (x: float32) -> float32 #foreign SDL3;
 
-SDL_sin :: (x: float64) -> float64 #foreign SDL3;
+SDL_sin  :: (x: float64) -> float64 #foreign SDL3;
 SDL_sinf :: (x: float32) -> float32 #foreign SDL3;
+SDL_cos  :: (x: float64) -> float64 #foreign SDL3;
+SDL_cosf :: (x: float32) -> float32 #foreign SDL3;
 
 SDL_srand       :: (seed: u64)                  #foreign SDL3;
 SDL_rand        :: (n: s32) -> s32              #foreign SDL3;
