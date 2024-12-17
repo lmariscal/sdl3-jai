@@ -1,1 +1,1 @@
-SDL_GetPlatform :: () -> *u8 #foreign SDL3;
+get_platform :: () -> *u8 #foreign SDL3 "SDL_GetPlatform";
