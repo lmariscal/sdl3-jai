@@ -14,368 +14,368 @@ GPU_Fence             :: void;
 
 GPU_Primitive_Type :: enum u32
 {
-    GPU_PRIMITIVETYPE_TRIANGLELIST;
-    GPU_PRIMITIVETYPE_TRIANGLESTRIP;
-    GPU_PRIMITIVETYPE_LINELIST;
-    GPU_PRIMITIVETYPE_LINESTRIP;
-    GPU_PRIMITIVETYPE_POINTLIST;
+    TRIANGLELIST;
+    TRIANGLESTRIP;
+    LINELIST;
+    LINESTRIP;
+    POINTLIST;
 }
 
 GPU_Load_Op :: enum u32
 {
-    GPU_LOADOP_LOAD;
-    GPU_LOADOP_CLEAR;
-    GPU_LOADOP_DONT_CARE;
+    LOAD;
+    CLEAR;
+    DONT_CARE;
 }
 
 GPU_Store_Op :: enum u32
 {
-    GPU_STOREOP_STORE;
-    GPU_STOREOP_DONT_CARE;
-    GPU_STOREOP_RESOLVE;
-    GPU_STOREOP_RESOLVE_AND_STORE;
+    STORE;
+    DONT_CARE;
+    RESOLVE;
+    RESOLVE_AND_STORE;
 }
 
 GPU_Index_Element_Size :: enum u32
 {
-    GPU_INDEXELEMENTSIZE_16BIT;
-    GPU_INDEXELEMENTSIZE_32BIT;
+    SIZE_16BIT;
+    SIZE_32BIT;
 }
 
 GPU_Texture_Format :: enum u32
 {
-    GPU_TEXTUREFORMAT_INVALID;
-    GPU_TEXTUREFORMAT_A8_UNORM;
-    GPU_TEXTUREFORMAT_R8_UNORM;
-    GPU_TEXTUREFORMAT_R8G8_UNORM;
-    GPU_TEXTUREFORMAT_R8G8B8A8_UNORM;
-    GPU_TEXTUREFORMAT_R16_UNORM;
-    GPU_TEXTUREFORMAT_R16G16_UNORM;
-    GPU_TEXTUREFORMAT_R16G16B16A16_UNORM;
-    GPU_TEXTUREFORMAT_R10G10B10A2_UNORM;
-    GPU_TEXTUREFORMAT_B5G6R5_UNORM;
-    GPU_TEXTUREFORMAT_B5G5R5A1_UNORM;
-    GPU_TEXTUREFORMAT_B4G4R4A4_UNORM;
-    GPU_TEXTUREFORMAT_B8G8R8A8_UNORM;
-    GPU_TEXTUREFORMAT_BC1_RGBA_UNORM;
-    GPU_TEXTUREFORMAT_BC2_RGBA_UNORM;
-    GPU_TEXTUREFORMAT_BC3_RGBA_UNORM;
-    GPU_TEXTUREFORMAT_BC4_R_UNORM;
-    GPU_TEXTUREFORMAT_BC5_RG_UNORM;
-    GPU_TEXTUREFORMAT_BC7_RGBA_UNORM;
-    GPU_TEXTUREFORMAT_BC6H_RGB_FLOAT;
-    GPU_TEXTUREFORMAT_BC6H_RGB_UFLOAT;
-    GPU_TEXTUREFORMAT_R8_SNORM;
-    GPU_TEXTUREFORMAT_R8G8_SNORM;
-    GPU_TEXTUREFORMAT_R8G8B8A8_SNORM;
-    GPU_TEXTUREFORMAT_R16_SNORM;
-    GPU_TEXTUREFORMAT_R16G16_SNORM;
-    GPU_TEXTUREFORMAT_R16G16B16A16_SNORM;
-    GPU_TEXTUREFORMAT_R16_FLOAT;
-    GPU_TEXTUREFORMAT_R16G16_FLOAT;
-    GPU_TEXTUREFORMAT_R16G16B16A16_FLOAT;
-    GPU_TEXTUREFORMAT_R32_FLOAT;
-    GPU_TEXTUREFORMAT_R32G32_FLOAT;
-    GPU_TEXTUREFORMAT_R32G32B32A32_FLOAT;
-    GPU_TEXTUREFORMAT_R11G11B10_UFLOAT;
-    GPU_TEXTUREFORMAT_R8_UINT;
-    GPU_TEXTUREFORMAT_R8G8_UINT;
-    GPU_TEXTUREFORMAT_R8G8B8A8_UINT;
-    GPU_TEXTUREFORMAT_R16_UINT;
-    GPU_TEXTUREFORMAT_R16G16_UINT;
-    GPU_TEXTUREFORMAT_R16G16B16A16_UINT;
-    GPU_TEXTUREFORMAT_R32_UINT;
-    GPU_TEXTUREFORMAT_R32G32_UINT;
-    GPU_TEXTUREFORMAT_R32G32B32A32_UINT;
-    GPU_TEXTUREFORMAT_R8_INT;
-    GPU_TEXTUREFORMAT_R8G8_INT;
-    GPU_TEXTUREFORMAT_R8G8B8A8_INT;
-    GPU_TEXTUREFORMAT_R16_INT;
-    GPU_TEXTUREFORMAT_R16G16_INT;
-    GPU_TEXTUREFORMAT_R16G16B16A16_INT;
-    GPU_TEXTUREFORMAT_R32_INT;
-    GPU_TEXTUREFORMAT_R32G32_INT;
-    GPU_TEXTUREFORMAT_R32G32B32A32_INT;
-    GPU_TEXTUREFORMAT_R8G8B8A8_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_B8G8R8A8_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_BC1_RGBA_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_BC2_RGBA_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_BC3_RGBA_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_BC7_RGBA_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_D16_UNORM;
-    GPU_TEXTUREFORMAT_D24_UNORM;
-    GPU_TEXTUREFORMAT_D32_FLOAT;
-    GPU_TEXTUREFORMAT_D24_UNORM_S8_UINT;
-    GPU_TEXTUREFORMAT_D32_FLOAT_S8_UINT;
-    GPU_TEXTUREFORMAT_ASTC_4x4_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_5x4_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_5x5_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_6x5_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_6x6_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_8x5_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_8x6_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_8x8_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_10x5_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_10x6_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_10x8_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_10x10_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_12x10_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_12x12_UNORM;
-    GPU_TEXTUREFORMAT_ASTC_4x4_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_5x4_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_5x5_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_6x5_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_6x6_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_8x5_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_8x6_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_8x8_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_10x5_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_10x6_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_10x8_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_10x10_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_12x10_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_12x12_UNORM_SRGB;
-    GPU_TEXTUREFORMAT_ASTC_4x4_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_5x4_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_5x5_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_6x5_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_6x6_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_8x5_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_8x6_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_8x8_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_10x5_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_10x6_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_10x8_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_10x10_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_12x10_FLOAT;
-    GPU_TEXTUREFORMAT_ASTC_12x12_FLOAT;
+    INVALID;
+    A8_UNORM;
+    R8_UNORM;
+    R8G8_UNORM;
+    R8G8B8A8_UNORM;
+    R16_UNORM;
+    R16G16_UNORM;
+    R16G16B16A16_UNORM;
+    R10G10B10A2_UNORM;
+    B5G6R5_UNORM;
+    B5G5R5A1_UNORM;
+    B4G4R4A4_UNORM;
+    B8G8R8A8_UNORM;
+    BC1_RGBA_UNORM;
+    BC2_RGBA_UNORM;
+    BC3_RGBA_UNORM;
+    BC4_R_UNORM;
+    BC5_RG_UNORM;
+    BC7_RGBA_UNORM;
+    BC6H_RGB_FLOAT;
+    BC6H_RGB_UFLOAT;
+    R8_SNORM;
+    R8G8_SNORM;
+    R8G8B8A8_SNORM;
+    R16_SNORM;
+    R16G16_SNORM;
+    R16G16B16A16_SNORM;
+    R16_FLOAT;
+    R16G16_FLOAT;
+    R16G16B16A16_FLOAT;
+    R32_FLOAT;
+    R32G32_FLOAT;
+    R32G32B32A32_FLOAT;
+    R11G11B10_UFLOAT;
+    R8_UINT;
+    R8G8_UINT;
+    R8G8B8A8_UINT;
+    R16_UINT;
+    R16G16_UINT;
+    R16G16B16A16_UINT;
+    R32_UINT;
+    R32G32_UINT;
+    R32G32B32A32_UINT;
+    R8_INT;
+    R8G8_INT;
+    R8G8B8A8_INT;
+    R16_INT;
+    R16G16_INT;
+    R16G16B16A16_INT;
+    R32_INT;
+    R32G32_INT;
+    R32G32B32A32_INT;
+    R8G8B8A8_UNORM_SRGB;
+    B8G8R8A8_UNORM_SRGB;
+    BC1_RGBA_UNORM_SRGB;
+    BC2_RGBA_UNORM_SRGB;
+    BC3_RGBA_UNORM_SRGB;
+    BC7_RGBA_UNORM_SRGB;
+    D16_UNORM;
+    D24_UNORM;
+    D32_FLOAT;
+    D24_UNORM_S8_UINT;
+    D32_FLOAT_S8_UINT;
+    ASTC_4x4_UNORM;
+    ASTC_5x4_UNORM;
+    ASTC_5x5_UNORM;
+    ASTC_6x5_UNORM;
+    ASTC_6x6_UNORM;
+    ASTC_8x5_UNORM;
+    ASTC_8x6_UNORM;
+    ASTC_8x8_UNORM;
+    ASTC_10x5_UNORM;
+    ASTC_10x6_UNORM;
+    ASTC_10x8_UNORM;
+    ASTC_10x10_UNORM;
+    ASTC_12x10_UNORM;
+    ASTC_12x12_UNORM;
+    ASTC_4x4_UNORM_SRGB;
+    ASTC_5x4_UNORM_SRGB;
+    ASTC_5x5_UNORM_SRGB;
+    ASTC_6x5_UNORM_SRGB;
+    ASTC_6x6_UNORM_SRGB;
+    ASTC_8x5_UNORM_SRGB;
+    ASTC_8x6_UNORM_SRGB;
+    ASTC_8x8_UNORM_SRGB;
+    ASTC_10x5_UNORM_SRGB;
+    ASTC_10x6_UNORM_SRGB;
+    ASTC_10x8_UNORM_SRGB;
+    ASTC_10x10_UNORM_SRGB;
+    ASTC_12x10_UNORM_SRGB;
+    ASTC_12x12_UNORM_SRGB;
+    ASTC_4x4_FLOAT;
+    ASTC_5x4_FLOAT;
+    ASTC_5x5_FLOAT;
+    ASTC_6x5_FLOAT;
+    ASTC_6x6_FLOAT;
+    ASTC_8x5_FLOAT;
+    ASTC_8x6_FLOAT;
+    ASTC_8x8_FLOAT;
+    ASTC_10x5_FLOAT;
+    ASTC_10x6_FLOAT;
+    ASTC_10x8_FLOAT;
+    ASTC_10x10_FLOAT;
+    ASTC_12x10_FLOAT;
+    ASTC_12x12_FLOAT;
 }
 
 GPU_Texture_Usage_Flags :: enum_flags u32
 {
-    GPU_TEXTUREUSAGE_SAMPLER                                 :: (1 << 0);
-    GPU_TEXTUREUSAGE_COLOR_TARGET                            :: (1 << 1);
-    GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET                    :: (1 << 2);
-    GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ                   :: (1 << 3);
-    GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ                    :: (1 << 4);
-    GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE                   :: (1 << 5);
-    GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE :: (1 << 6);
+    SAMPLER                                 :: (1 << 0);
+    COLOR_TARGET                            :: (1 << 1);
+    DEPTH_STENCIL_TARGET                    :: (1 << 2);
+    GRAPHICS_STORAGE_READ                   :: (1 << 3);
+    COMPUTE_STORAGE_READ                    :: (1 << 4);
+    COMPUTE_STORAGE_WRITE                   :: (1 << 5);
+    COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE :: (1 << 6);
 }
 
 GPU_Texture_Type :: enum u32
 {
-    GPU_TEXTURETYPE_2D;
-    GPU_TEXTURETYPE_2D_ARRAY;
-    GPU_TEXTURETYPE_3D;
-    GPU_TEXTURETYPE_CUBE;
-    GPU_TEXTURETYPE_CUBE_ARRAY;
+    TYPE_2D;
+    TYPE_2D_ARRAY;
+    TYPE_3D;
+    TYPE_CUBE;
+    TYPE_CUBE_ARRAY;
 }
 
 GPU_Sample_Count :: enum u32
 {
-    GPU_SAMPLECOUNT_1;
-    GPU_SAMPLECOUNT_2;
-    GPU_SAMPLECOUNT_4;
-    GPU_SAMPLECOUNT_8;
+    ONE;
+    TWO;
+    FOUR;
+    EIGHT;
 }
 
 GPU_Cube_Map_Face :: enum u32
 {
-    GPU_CUBEMAPFACE_POSITIVEX;
-    GPU_CUBEMAPFACE_NEGATIVEX;
-    GPU_CUBEMAPFACE_POSITIVEY;
-    GPU_CUBEMAPFACE_NEGATIVEY;
-    GPU_CUBEMAPFACE_POSITIVEZ;
-    GPU_CUBEMAPFACE_NEGATIVEZ;
+    POSITIVEX;
+    NEGATIVEX;
+    POSITIVEY;
+    NEGATIVEY;
+    POSITIVEZ;
+    NEGATIVEZ;
 }
 
 GPU_Buffer_Usage_Flags :: enum_flags u32
 {
-    GPU_BUFFERUSAGE_VERTEX                                  :: (1 << 0);
-    GPU_BUFFERUSAGE_INDEX                                   :: (1 << 1);
-    GPU_BUFFERUSAGE_INDIRECT                                :: (1 << 2);
-    GPU_BUFFERUSAGE_GRAPHICS_STORAGE_READ                   :: (1 << 3);
-    GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ                    :: (1 << 4);
-    GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE                   :: (1 << 5);
+    VERTEX                                  :: (1 << 0);
+    INDEX                                   :: (1 << 1);
+    INDIRECT                                :: (1 << 2);
+    GRAPHICS_STORAGE_READ                   :: (1 << 3);
+    COMPUTE_STORAGE_READ                    :: (1 << 4);
+    COMPUTE_STORAGE_WRITE                   :: (1 << 5);
 }
 
 GPU_Transfer_Buffer_Usage :: enum u32
 {
-    GPU_TRANSFERBUFFERUSAGE_UPLOAD;
-    GPU_TRANSFERBUFFERUSAGE_DOWNLOAD;
+    UPLOAD;
+    DOWNLOAD;
 }
 
 GPU_Shader_Stage :: enum u32
 {
-    GPU_SHADERSTAGE_VERTEX;
-    GPU_SHADERSTAGE_FRAGMENT;
+    VERTEX;
+    FRAGMENT;
 }
 
 GPU_Shader_Format :: enum_flags u32
 {
-    GPU_SHADERFORMAT_INVALID                                :: 0;
-    GPU_SHADERFORMAT_PRIVATE                                :: (1 << 0);
-    GPU_SHADERFORMAT_SPIRV                                  :: (1 << 1);
-    GPU_SHADERFORMAT_DXBC                                   :: (1 << 2);
-    GPU_SHADERFORMAT_DXIL                                   :: (1 << 3);
-    GPU_SHADERFORMAT_MSL                                    :: (1 << 4);
-    GPU_SHADERFORMAT_METALLIB                               :: (1 << 5);
+    INVALID                                :: 0;
+    PRIVATE                                :: (1 << 0);
+    SPIRV                                  :: (1 << 1);
+    DXBC                                   :: (1 << 2);
+    DXIL                                   :: (1 << 3);
+    MSL                                    :: (1 << 4);
+    METALLIB                               :: (1 << 5);
 }
 
 GPU_Vertex_Element_Format :: enum u32
 {
-    GPU_VERTEXELEMENTFORMAT_INVALID;
-    GPU_VERTEXELEMENTFORMAT_INT;
-    GPU_VERTEXELEMENTFORMAT_INT2;
-    GPU_VERTEXELEMENTFORMAT_INT3;
-    GPU_VERTEXELEMENTFORMAT_INT4;
-    GPU_VERTEXELEMENTFORMAT_UINT;
-    GPU_VERTEXELEMENTFORMAT_UINT2;
-    GPU_VERTEXELEMENTFORMAT_UINT3;
-    GPU_VERTEXELEMENTFORMAT_UINT4;
-    GPU_VERTEXELEMENTFORMAT_FLOAT;
-    GPU_VERTEXELEMENTFORMAT_FLOAT2;
-    GPU_VERTEXELEMENTFORMAT_FLOAT3;
-    GPU_VERTEXELEMENTFORMAT_FLOAT4;
-    GPU_VERTEXELEMENTFORMAT_BYTE2;
-    GPU_VERTEXELEMENTFORMAT_BYTE4;
-    GPU_VERTEXELEMENTFORMAT_UBYTE2;
-    GPU_VERTEXELEMENTFORMAT_UBYTE4;
-    GPU_VERTEXELEMENTFORMAT_BYTE2_NORM;
-    GPU_VERTEXELEMENTFORMAT_BYTE4_NORM;
-    GPU_VERTEXELEMENTFORMAT_UBYTE2_NORM;
-    GPU_VERTEXELEMENTFORMAT_UBYTE4_NORM;
-    GPU_VERTEXELEMENTFORMAT_SHORT2;
-    GPU_VERTEXELEMENTFORMAT_SHORT4;
-    GPU_VERTEXELEMENTFORMAT_USHORT2;
-    GPU_VERTEXELEMENTFORMAT_USHORT4;
-    GPU_VERTEXELEMENTFORMAT_SHORT2_NORM;
-    GPU_VERTEXELEMENTFORMAT_SHORT4_NORM;
-    GPU_VERTEXELEMENTFORMAT_USHORT2_NORM;
-    GPU_VERTEXELEMENTFORMAT_USHORT4_NORM;
-    GPU_VERTEXELEMENTFORMAT_HALF2;
-    GPU_VERTEXELEMENTFORMAT_HALF4;
+    INVALID;
+    INT;
+    INT2;
+    INT3;
+    INT4;
+    UINT;
+    UINT2;
+    UINT3;
+    UINT4;
+    FLOAT;
+    FLOAT2;
+    FLOAT3;
+    FLOAT4;
+    BYTE2;
+    BYTE4;
+    UBYTE2;
+    UBYTE4;
+    BYTE2_NORM;
+    BYTE4_NORM;
+    UBYTE2_NORM;
+    UBYTE4_NORM;
+    SHORT2;
+    SHORT4;
+    USHORT2;
+    USHORT4;
+    SHORT2_NORM;
+    SHORT4_NORM;
+    USHORT2_NORM;
+    USHORT4_NORM;
+    HALF2;
+    HALF4;
 }
 
 GPU_Vertex_Input_Rate :: enum u32
 {
-    GPU_VERTEXINPUTRATE_VERTEX;
-    GPU_VERTEXINPUTRATE_INSTANCE;
+    VERTEX;
+    INSTANCE;
 }
 
 GPU_Fill_Mode :: enum u32
 {
-    GPU_FILLMODE_FILL;
-    GPU_FILLMODE_LINE;
+    FILL;
+    LINE;
 }
 
 GPU_Cull_Mode :: enum u32
 {
-    GPU_CULLMODE_NONE;
-    GPU_CULLMODE_FRONT;
-    GPU_CULLMODE_BACK;
+    NONE;
+    FRONT;
+    BACK;
 }
 
 GPU_Front_Face :: enum u32
 {
-    GPU_FRONTFACE_COUNTER_CLOCKWISE;
-    GPU_FRONTFACE_CLOCKWISE;
+    COUNTER_CLOCKWISE;
+    CLOCKWISE;
 }
 
 GPU_Compare_Op :: enum u32
 {
-    GPU_COMPAREOP_INVALID;
-    GPU_COMPAREOP_NEVER;
-    GPU_COMPAREOP_LESS;
-    GPU_COMPAREOP_EQUAL;
-    GPU_COMPAREOP_LESS_OR_EQUAL;
-    GPU_COMPAREOP_GREATER;
-    GPU_COMPAREOP_NOT_EQUAL;
-    GPU_COMPAREOP_GREATER_OR_EQUAL;
-    GPU_COMPAREOP_ALWAYS;
+    INVALID;
+    NEVER;
+    LESS;
+    EQUAL;
+    LESS_OR_EQUAL;
+    GREATER;
+    NOT_EQUAL;
+    GREATER_OR_EQUAL;
+    ALWAYS;
 }
 
 GPU_Stencil_Op :: enum u32
 {
-    GPU_STENCILOP_INVALID;
-    GPU_STENCILOP_KEEP;
-    GPU_STENCILOP_ZERO;
-    GPU_STENCILOP_REPLACE;
-    GPU_STENCILOP_INCREMENT_AND_CLAMP;
-    GPU_STENCILOP_DECREMENT_AND_CLAMP;
-    GPU_STENCILOP_INVERT;
-    GPU_STENCILOP_INCREMENT_AND_WRAP;
-    GPU_STENCILOP_DECREMENT_AND_WRAP;
+    INVALID;
+    KEEP;
+    ZERO;
+    REPLACE;
+    INCREMENT_AND_CLAMP;
+    DECREMENT_AND_CLAMP;
+    INVERT;
+    INCREMENT_AND_WRAP;
+    DECREMENT_AND_WRAP;
 }
 
 GPU_Blend_Op :: enum u32
 {
-    GPU_BLENDOP_INVALID;
-    GPU_BLENDOP_ADD;
-    GPU_BLENDOP_SUBTRACT;
-    GPU_BLENDOP_REVERSE_SUBTRACT;
-    GPU_BLENDOP_MIN;
-    GPU_BLENDOP_MAX;
+    INVALID;
+    ADD;
+    SUBTRACT;
+    REVERSE_SUBTRACT;
+    MIN;
+    MAX;
 }
 
 GPU_Blend_Factor :: enum u32
 {
-    GPU_BLENDFACTOR_INVALID;
-    GPU_BLENDFACTOR_ZERO;
-    GPU_BLENDFACTOR_ONE;
-    GPU_BLENDFACTOR_SRC_COLOR;
-    GPU_BLENDFACTOR_ONE_MINUS_SRC_COLOR;
-    GPU_BLENDFACTOR_DST_COLOR;
-    GPU_BLENDFACTOR_ONE_MINUS_DST_COLOR;
-    GPU_BLENDFACTOR_SRC_ALPHA;
-    GPU_BLENDFACTOR_ONE_MINUS_SRC_ALPHA;
-    GPU_BLENDFACTOR_DST_ALPHA;
-    GPU_BLENDFACTOR_ONE_MINUS_DST_ALPHA;
-    GPU_BLENDFACTOR_CONSTANT_COLOR;
-    GPU_BLENDFACTOR_ONE_MINUS_CONSTANT_COLOR;
-    GPU_BLENDFACTOR_SRC_ALPHA_SATURATE;
+    INVALID;
+    ZERO;
+    ONE;
+    SRC_COLOR;
+    ONE_MINUS_SRC_COLOR;
+    DST_COLOR;
+    ONE_MINUS_DST_COLOR;
+    SRC_ALPHA;
+    ONE_MINUS_SRC_ALPHA;
+    DST_ALPHA;
+    ONE_MINUS_DST_ALPHA;
+    CONSTANT_COLOR;
+    ONE_MINUS_CONSTANT_COLOR;
+    SRC_ALPHA_SATURATE;
 }
 
 GPU_Color_Component_Flags :: enum_flags u8
 {
-    GPU_COLORCOMPONENT_R :: (1 << 0);
-    GPU_COLORCOMPONENT_G :: (1 << 1);
-    GPU_COLORCOMPONENT_B :: (1 << 2);
-    GPU_COLORCOMPONENT_A :: (1 << 3);
+    R :: (1 << 0);
+    G :: (1 << 1);
+    B :: (1 << 2);
+    A :: (1 << 3);
 }
 
 GPU_Filter :: enum u32
 {
-    GPU_FILTER_NEAREST;
-    GPU_FILTER_LINEAR;
+    NEAREST;
+    LINEAR;
 }
 
 GPU_Sampler_Mipmap_Mode :: enum u32
 {
-    GPU_SAMPLERMIPMAPMODE_NEAREST;
-    GPU_SAMPLERMIPMAPMODE_LINEAR;
+    NEAREST;
+    LINEAR;
 }
 
 GPU_Sampler_Address_Mode :: enum u32
 {
-    GPU_SAMPLERADDRESSMODE_REPEAT;
-    GPU_SAMPLERADDRESSMODE_MIRRORED_REPEAT;
-    GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE;
+    REPEAT;
+    MIRRORED_REPEAT;
+    CLAMP_TO_EDGE;
 }
 
 GPU_Present_Mode :: enum u32
 {
-    GPU_PRESENTMODE_VSYNC;
-    GPU_PRESENTMODE_IMMEDIATE;
-    GPU_PRESENTMODE_MAILBOX;
+    VSYNC;
+    IMMEDIATE;
+    MAILBOX;
 }
 
 GPU_Swapchain_Composition :: enum u32
 {
-    GPU_SWAPCHAINCOMPOSITION_SDR;
-    GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR;
-    GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR;
-    GPU_SWAPCHAINCOMPOSITION_HDR10_ST2048;
+    SDR;
+    SDR_LINEAR;
+    HDR_EXTENDED_LINEAR;
+    HDR10_ST2048;
 }
 
 GPU_Viewport :: struct
@@ -757,7 +757,6 @@ gpu_supports_shader_formats                 :: (format_flags: GPU_Shader_Format,
 gpu_supports_properties                     :: (props: Properties_ID) -> bool                                                                                                                                                           #foreign SDL3 "SDL_GPUSupportsProperties";
 create_gpu_device                           :: (format_flags: GPU_Shader_Format, debug_mode: bool, name: *u8) -> *GPU_Device                                                                                                            #foreign SDL3 "SDL_CreateGPUDevice";
 create_gpu_device_with_properties           :: (props: Properties_ID) -> *GPU_Device                                                                                                                                                    #foreign SDL3 "SDL_CreateGPUDeviceWithProperties";
-
 destroy_gpu_device                          :: (device: *GPU_Device)                                                                                                                                                                    #foreign SDL3 "SDL_DestroyGPUDevice";
 get_num_gpu_drivers                         :: () -> s32                                                                                                                                                                                #foreign SDL3 "SDL_GetNumGPUDrivers";
 get_gpu_driver                              :: (index: s32) -> *u8                                                                                                                                                                      #foreign SDL3 "SDL_GetGPUDriver";
@@ -805,9 +804,6 @@ draw_gpu_primitives                         :: (render_pass: *GPU_Render_Pass, n
 draw_gpu_primitives_indirect                :: (render_pass: *GPU_Render_Pass, buffer: *GPU_Buffer, offset: u32, draw_count: u32)                                                                                                       #foreign SDL3 "SDL_DrawGPUPrimitivesIndirect";
 draw_gpu_indexed_primitives_indirect        :: (render_pass: *GPU_Render_Pass, buffer: *GPU_Buffer, offset: u32, draw_count: u32)                                                                                                       #foreign SDL3 "SDL_DrawGPUIndexedPrimitivesIndirect";
 end_gpu_render_pass                         :: (render_pass: *GPU_Render_Pass)                                                                                                                                                          #foreign SDL3 "SDL_EndGPURenderPass";
-
-begin_gpu_compute_pass           :: (command_buffer: *GPU_Command_Buffer, storage_texture_bindings: *GPU_Storage_Texture_Read_Write_Binding, num_storage_texture_bindings: u32, storage_buffer_bindings: *GPU_Storage_Buffer_Read_Write_Binding, num_storage_buffer_bindings: u32) -> *GPU_Compute_Pass #foreign SDL3 "SDL_BeginGPUComputePass";
-
 bind_gpu_compute_pipeline                   :: (compute_pass: *GPU_Compute_Pass, compute_pipeline: *GPU_Compute_Pipeline)                                                                                                               #foreign SDL3 "SDL_BindGPUComputePipeline";
 bind_gpu_compute_samplers                   :: (compute_pass: *GPU_Compute_Pass, first_slot: u32, texture_sampler_bindings: *GPU_Texture_Sampler_Binding, num_bindings: u32)                                                            #foreign SDL3 "SDL_BindGPUComputeSamplers";
 bind_gpu_compute_storage_textures           :: (compute_pass: *GPU_Compute_Pass, first_slot: u32, storage_textures: **GPU_Texture, num_bindings: u32)                                                                                   #foreign SDL3 "SDL_BindGPUComputeStorageTextures";
@@ -845,6 +841,9 @@ gpu_texture_format_texel_block_size         :: (format: GPU_Texture_Format) -> u
 gpu_texture_supports_format                 :: (device: *GPU_Device, format: GPU_Texture_Format, type: GPU_Texture_Type, usage: GPU_Texture_Usage_Flags) -> bool                                                                        #foreign SDL3 "SDL_GPUTextureSupportsFormat";
 gpu_texture_supports_sample_count           :: (device: *GPU_Device, format: GPU_Texture_Format, sample_count: GPU_Sample_Count) -> bool                                                                                                #foreign SDL3 "SDL_GPUTextureSupportsSampleCount";
 calculate_gpu_texture_format_size           :: (format: GPU_Texture_Format, width: u32, depth: u32, depth_of_layer_count: u32) -> u32                                                                                                   #foreign SDL3 "SDL_CalculateGPUTextureFormatSize";
+
+begin_gpu_compute_pass           :: (command_buffer: *GPU_Command_Buffer, storage_texture_bindings: *GPU_Storage_Texture_Read_Write_Binding, num_storage_texture_bindings: u32, storage_buffer_bindings: *GPU_Storage_Buffer_Read_Write_Binding, num_storage_buffer_bindings: u32) -> *GPU_Compute_Pass #foreign SDL3 "SDL_BeginGPUComputePass";
+
 
 
 PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN          :: "SDL.gpu.device.create.debugmode";

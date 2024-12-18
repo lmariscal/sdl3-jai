@@ -29,8 +29,8 @@ System_Cursor :: enum u32
 
 Mouse_Wheel_Direction :: enum u32
 {
-    MOUSEWHEEL_NORMAL;
-    MOUSEWHEEL_FLIPPED;
+    NORMAL;
+    FLIPPED;
 }
 
 BUTTON_LEFT     :: 1;

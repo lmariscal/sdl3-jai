@@ -9,18 +9,18 @@ Vertex :: struct
 
 Texture_Access :: enum u32
 {
-    TEXTUREACCESS_STATIC;
-    TEXTUREACCESS_STREAMING;
-    TEXTUREACCESS_TARGET;
+    STATIC;
+    STREAMING;
+    TARGET;
 }
 
 Renderer_Logical_Presentation :: enum u32
 {
-    LOGICAL_PRESENTATION_DISABLED;
-    LOGICAL_PRESENTATION_STRETCH;
-    LOGICAL_PRESENTATION_LETTERBOX;
-    LOGICAL_PRESENTATION_OVERSCAN;
-    LOGICAL_PRESENTATION_INTEGER_SCALE;
+    DISABLED;
+    STRETCH;
+    LETTERBOX;
+    OVERSCAN;
+    INTEGER_SCALE;
 }
 
 Renderer :: void;
@@ -98,7 +98,7 @@ render_rects                         :: (renderer: *Renderer, rects: *F_Rect, co
 render_fill_rect                     :: (renderer: *Renderer, rect: *F_Rect) -> bool                                                                                                                                                                            #foreign SDL3 "SDL_RenderFillRect";
 render_fill_rects                    :: (renderer: *Renderer, rects: *F_Rect, count: s32) -> bool                                                                                                                                                               #foreign SDL3 "SDL_RenderFillRects";
 render_texture                       :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, dst_rect: *F_Rect) -> bool                                                                                                                                  #foreign SDL3 "SDL_RenderTexture";
-render_texture_rotated               :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, dst_rect: *F_Rect, angle: float64, center: *F_Point, flip: Flip_Mode) -> bool                                                                                #foreign SDL3 "SDL_RenderTextureRotated";
+render_texture_rotated               :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, dst_rect: *F_Rect, angle: float64, center: *F_Point, flip: Flip_Mode) -> bool                                                                               #foreign SDL3 "SDL_RenderTextureRotated";
 render_texture_tiled                 :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, scale: float32, dst_rect: *F_Rect) -> bool                                                                                                                  #foreign SDL3 "SDL_RenderTextureTiled";
 render_texture9_grid                 :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, left_width: float32, right_width: float32, top_height: float32, bottom_height: float32, scale: float32, dst_rect: *F_Rect) -> bool                          #foreign SDL3 "SDL_RenderTexture9Grid";
 render_geometry                      :: (renderer: *Renderer, texture: *Texture, vertices: *Vertex, num_vertices: s32, indices: s32, num_indices: s32) -> bool                                                                                                  #foreign SDL3 "SDL_RenderGeometry";
@@ -110,13 +110,13 @@ flush_renderer                       :: (renderer: *Renderer) -> bool           
 get_render_metal_layer               :: (renderer: *Renderer) -> *void                                                                                                                                                                                          #foreign SDL3 "SDL_GetRenderMetalLayer";
 get_render_metal_command_encoder     :: (renderer: *Renderer) -> *void                                                                                                                                                                                          #foreign SDL3 "SDL_GetRenderMetalCommandEncoder";
 add_vulkan_render_semaphores         :: (renderer: *Renderer, wait_stage_mask: u32, wait_semaphore: s64, signal_semaphore: s64) -> bool                                                                                                                         #foreign SDL3 "SDL_AddVulkanRenderSemaphores";
-
-RENDERER_VSYNC_DISABLED ::  0;
-RENDERER_VSYNC_ADAPTIVE :: -1;
-
 set_render_v_sync                    :: (renderer: *Renderer, vsync: s32) -> bool                                                                                                                                                                               #foreign SDL3 "SDL_SetRenderVSync";
 get_render_v_sync                    :: (renderer: *Renderer, vsync: *s32) -> bool                                                                                                                                                                              #foreign SDL3 "SDL_GetRenderVSync";
 render_debug_text                    :: (renderer: *Renderer, x: float32, y: float32, str: *u8) -> bool                                                                                                                                                         #foreign SDL3 "SDL_RenderDebugText";
+
+
+RENDERER_VSYNC_DISABLED ::  0;
+RENDERER_VSYNC_ADAPTIVE :: -1;
 
 DEBUG_TEXT_FONT_CHARACTER_SIZE :: 8;
 

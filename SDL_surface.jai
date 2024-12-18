@@ -1,24 +1,24 @@
 Surface_Flags :: enum_flags u32
 {
-    SURFACE_PREALLOCATED :: 0x00000001;
-    SURFACE_LOCK_NEEDED  :: 0x00000002;
-    SURFACE_LOCKED       :: 0x00000004;
-    SURFACE_SIMD_ALIGNED :: 0x00000008;
+    PREALLOCATED :: 0x00000001;
+    LOCK_NEEDED  :: 0x00000002;
+    LOCKED       :: 0x00000004;
+    SIMD_ALIGNED :: 0x00000008;
 }
 
 // MUSTLOCK :: (s: *Surface) -> bool {return (s.flags & SURFACE_LOCK_NEEDED) == SURFACE_LOCK_NEEDED;}
 
 Scale_Mode :: enum u32
 {
-    SCALEMODE_NEAREST;
-    SCALEMODE_LINEAR;
+    NEAREST;
+    LINEAR;
 }
 
 Flip_Mode :: enum u32
 {
-    FLIP_NONE;
-    FLIP_HORIZONTAL;
-    FLIP_VERTICAL;
+    NONE;
+    HORIZONTAL;
+    VERTICAL;
 }
 
 Surface :: struct
@@ -75,9 +75,6 @@ scale_surface                   :: (surface: *Surface, width: s32, height: s32, 
 convert_surface                 :: (surface: *Surface, format: Pixel_Format) -> *Surface                                                                                                                                    #foreign SDL3 "SDL_ConvertSurface";
 convert_surface_and_colorspace  :: (surface: *Surface, format: Pixel_Format, palette: *Palette, colorspace: Colorspace, props: Properties_ID) -> *Surface                                                                   #foreign SDL3 "SDL_ConvertSurfaceAndColorspace";
 convert_pixels                  :: (width: s32, height: s32, src_format: Pixel_Format, src: *void, src_pitch: s32, dst_format: Pixel_Format, dst: *void, dst_pitch: s32) -> bool                                            #foreign SDL3 "SDL_ConvertPixels";
-
-convert_pixels_and_colorspace   :: (width: s32, height: s32, src_format: Pixel_Format, src_colorspace: Colorspace, src_properties: Properties_ID, src: *void, src_pitch: s32, dst_format: Pixel_Format, dst_colorspace: Colorspace, dst_properties: Properties_ID, dst: *void, dst_pitch: s32) -> bool #foreign SDL3 "SDL_ConvertPixelsAndColorspace";
-
 premultiply_alpha               :: (width: s32, height: s32, src_format: Pixel_Format, src: *void, src_pitch: s32, dst_format: Pixel_Format, dst: *void, dst_pitch: s32, linear: bool) -> bool                              #foreign SDL3 "SDL_PremultiplyAlpha";
 premultiply_surface_alpha       :: (surface: *Surface, linear: bool) -> bool                                                                                                                                                #foreign SDL3 "SDL_PremultiplySurfaceAlpha";
 clear_surface                   :: (surface: *Surface, r: float32, g: float32, b: float32, a: float32) -> bool                                                                                                              #foreign SDL3 "SDL_ClearSurface";
@@ -96,6 +93,9 @@ read_surface_pixel              :: (surface: *Surface, x: s32, y: s32, r: *u8, g
 read_surface_pixel_float        :: (surface: *Surface, x: s32, y: s32, r: *float32, g: *float32, b: *float32, a: *float32) -> bool                                                                                          #foreign SDL3 "SDL_ReadSurfacePixelFloat";
 write_surface_pixel             :: (surface: *Surface, x: s32, y: s32, r: u8, g: u8, b: u8, a: u8) -> bool                                                                                                                  #foreign SDL3 "SDL_WriteSurfacePixel";
 write_surface_pixel_float       :: (surface: *Surface, x: s32, y: s32, r: float32, g: float32, b: float32, a: float32) -> bool                                                                                              #foreign SDL3 "SDL_WriteSurfacePixelFloat";
+
+convert_pixels_and_colorspace   :: (width: s32, height: s32, src_format: Pixel_Format, src_colorspace: Colorspace, src_properties: Properties_ID, src: *void, src_pitch: s32, dst_format: Pixel_Format, dst_colorspace: Colorspace, dst_properties: Properties_ID, dst: *void, dst_pitch: s32) -> bool #foreign SDL3 "SDL_ConvertPixelsAndColorspace";
+
 
 
 PROP_SURFACE_SDR_WHITE_POINT_FLOAT              :: "SDL.surface.SDR_white_point";

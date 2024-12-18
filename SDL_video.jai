@@ -1,13 +1,11 @@
 Display_ID :: u32;
 Window_ID  :: u32;
 
-PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER :: "SDL.video.wayland.wl_display";
-
 System_Theme :: enum u32
 {
-    SYSTEM_THEME_UNKNOWN;
-    SYSTEM_THEME_LIGHT;
-    SYSTEM_THEME_DARK;
+    UNKNOWN;
+    LIGHT;
+    DARK;
 }
 
 Display_Mode_Data :: void;
@@ -28,41 +26,41 @@ Display_Mode :: struct
 
 Display_Orientation :: enum u32
 {
-    ORIENTATION_UNKNOWN;
-    ORIENTATION_LANDSCAPE;
-    ORIENTATION_LANDSCAPE_FLIPPED;
-    ORIENTATION_PORTRAIT;
-    ORIENTATION_PORTRAIT_FLIPPED;
+    UNKNOWN;
+    LANDSCAPE;
+    LANDSCAPE_FLIPPED;
+    PORTRAIT;
+    PORTRAIT_FLIPPED;
 }
 
 Window       :: void;
 Window_Flags :: enum_flags u64
 {
-    WINDOW_FULLSCREEN           :: 0x0000000000000001;
-    WINDOW_OPENGL               :: 0x0000000000000002;
-    WINDOW_OCCLUDED             :: 0x0000000000000004;
-    WINDOW_HIDDEN               :: 0x0000000000000008;
-    WINDOW_BORDERLESS           :: 0x0000000000000010;
-    WINDOW_RESIZABLE            :: 0x0000000000000020;
-    WINDOW_MINIMIZED            :: 0x0000000000000040;
-    WINDOW_MAXIMIZED            :: 0x0000000000000080;
-    WINDOW_MOUSE_GRABBED        :: 0x0000000000000100;
-    WINDOW_INPUT_FOCUS          :: 0x0000000000000200;
-    WINDOW_MOUSE_FOCUS          :: 0x0000000000000400;
-    WINDOW_EXTERNAL             :: 0x0000000000000800;
-    WINDOW_MODAL                :: 0x0000000000001000;
-    WINDOW_HIGH_PIXEL_DENSITY   :: 0x0000000000002000;
-    WINDOW_MOUSE_CAPTURE        :: 0x0000000000004000;
-    WINDOW_MOUSE_RELATIVE_MODE  :: 0x0000000000008000;
-    WINDOW_ALWAYS_ON_TOP        :: 0x0000000000010000;
-    WINDOW_UTILITY              :: 0x0000000000020000;
-    WINDOW_TOOLTIP              :: 0x0000000000040000;
-    WINDOW_POPUP_MENU           :: 0x0000000000080000;
-    WINDOW_KEYBOARD_GRABBED     :: 0x0000000000100000;
-    WINDOW_VULKAN               :: 0x0000000010000000;
-    WINDOW_METAL                :: 0x0000000020000000;
-    WINDOW_TRANSPARENT          :: 0x0000000040000000;
-    WINDOW_NOT_FOCUSABLE        :: 0x0000000080000000;
+    FULLSCREEN           :: 0x0000000000000001;
+    OPENGL               :: 0x0000000000000002;
+    OCCLUDED             :: 0x0000000000000004;
+    HIDDEN               :: 0x0000000000000008;
+    BORDERLESS           :: 0x0000000000000010;
+    RESIZABLE            :: 0x0000000000000020;
+    MINIMIZED            :: 0x0000000000000040;
+    MAXIMIZED            :: 0x0000000000000080;
+    MOUSE_GRABBED        :: 0x0000000000000100;
+    INPUT_FOCUS          :: 0x0000000000000200;
+    MOUSE_FOCUS          :: 0x0000000000000400;
+    EXTERNAL             :: 0x0000000000000800;
+    MODAL                :: 0x0000000000001000;
+    HIGH_PIXEL_DENSITY   :: 0x0000000000002000;
+    MOUSE_CAPTURE        :: 0x0000000000004000;
+    MOUSE_RELATIVE_MODE  :: 0x0000000000008000;
+    ALWAYS_ON_TOP        :: 0x0000000000010000;
+    UTILITY              :: 0x0000000000020000;
+    TOOLTIP              :: 0x0000000000040000;
+    POPUP_MENU           :: 0x0000000000080000;
+    KEYBOARD_GRABBED     :: 0x0000000000100000;
+    VULKAN               :: 0x0000000010000000;
+    METAL                :: 0x0000000020000000;
+    TRANSPARENT          :: 0x0000000040000000;
+    NOT_FOCUSABLE        :: 0x0000000080000000;
 }
 
 
@@ -96,100 +94,200 @@ EGL_Int_Array_Callback    :: #type (user_data: *void, display: EGL_Display, conf
 
 GL_Attr :: enum u32
 {
-    GL_RED_SIZE;
-    GL_GREEN_SIZE;
-    GL_BLUE_SIZE;
-    GL_ALPHA_SIZE;
-    GL_BUFFER_SIZE;
-    GL_DOUBLEBUFFER;
-    GL_DEPTH_SIZE;
-    GL_STENCIL_SIZE;
-    GL_ACCUM_RED_SIZE;
-    GL_ACCUM_GREEN_SIZE;
-    GL_ACCUM_BLUE_SIZE;
-    GL_ACCUM_ALPHA_SIZE;
-    GL_STEREO;
-    GL_MULTISAMPLEBUFFERS;
-    GL_MULTISAMPLESAMPLES;
-    GL_ACCELERATED_VISUAL;
-    GL_RETAINED_BACKING;
-    GL_CONTEXT_MAJOR_VERSION;
-    GL_CONTEXT_MINOR_VERSION;
-    GL_CONTEXT_FLAGS;
-    GL_CONTEXT_PROFILE_MASK;
-    GL_SHARE_WITH_CURRENT_CONTEXT;
-    GL_FRAMEBUFFER_SRGB_CAPABLE;
-    GL_CONTEXT_RELEASE_BEHAVIOR;
-    GL_CONTEXT_RESET_NOTIFICATION;
-    GL_CONTEXT_NO_ERROR;
-    GL_FLOATBUFFERS;
-    GL_EGL_PLATFORM;
+    RED_SIZE;
+    GREEN_SIZE;
+    BLUE_SIZE;
+    ALPHA_SIZE;
+    BUFFER_SIZE;
+    DOUBLEBUFFER;
+    DEPTH_SIZE;
+    STENCIL_SIZE;
+    ACCUM_RED_SIZE;
+    ACCUM_GREEN_SIZE;
+    ACCUM_BLUE_SIZE;
+    ACCUM_ALPHA_SIZE;
+    STEREO;
+    MULTISAMPLEBUFFERS;
+    MULTISAMPLESAMPLES;
+    ACCELERATED_VISUAL;
+    RETAINED_BACKING;
+    CONTEXT_MAJOR_VERSION;
+    CONTEXT_MINOR_VERSION;
+    CONTEXT_FLAGS;
+    CONTEXT_PROFILE_MASK;
+    SHARE_WITH_CURRENT_CONTEXT;
+    FRAMEBUFFER_SRGB_CAPABLE;
+    CONTEXT_RELEASE_BEHAVIOR;
+    CONTEXT_RESET_NOTIFICATION;
+    CONTEXT_NO_ERROR;
+    FLOATBUFFERS;
+    EGL_PLATFORM;
 }
 
 
 GL_Profile :: enum_flags u32
 {
-    GL_CONTEXT_PROFILE_CORE          :: 0x0001;
-    GL_CONTEXT_PROFILE_COMPATIBILITY :: 0x0002;
-    GL_CONTEXT_PROFILE_ES            :: 0x0004;
+    CORE          :: 0x0001;
+    COMPATIBILITY :: 0x0002;
+    ES            :: 0x0004;
 }
 
 GL_Context_Flag :: enum_flags u32
 {
-    GL_CONTEXT_DEBUG_FLAG              :: 0x0001;
-    GL_CONTEXT_FORWARD_COMPATIBLE_FLAG :: 0x0002;
-    GL_CONTEXT_ROBUST_ACCESS_FLAG      :: 0x0004;
-    GL_CONTEXT_RESET_ISOLATION_FLAG    :: 0x0008;
+    DEBUG_FLAG              :: 0x0001;
+    FORWARD_COMPATIBLE_FLAG :: 0x0002;
+    ROBUST_ACCESS_FLAG      :: 0x0004;
+    RESET_ISOLATION_FLAG    :: 0x0008;
 }
 
-GLContextReleaseFlag :: enum_flags u32
+Gl_Context_Release_Flag :: enum_flags u32
 {
-    GL_CONTEXT_RELEASE_BEHAVIOR_NONE   :: 0x0000;
-    GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH  :: 0x0001;
+    NONE   :: 0x0000;
+    FLUSH  :: 0x0001;
 }
 
 
 
 GL_Context_Reset_Notification :: enum_flags u32
 {
-    GL_CONTEXT_RESET_NO_NOTIFICATION   :: 0x0000;
-    GL_CONTEXT_RESET_LOSE_CONTEXT      :: 0x0001;
+    NO_NOTIFICATION   :: 0x0000;
+    LOSE_CONTEXT      :: 0x0001;
 }
 
-get_num_video_drivers               :: () -> s32                                                                                                                         #foreign SDL3 "SDL_GetNumVideoDrivers";
-get_video_driver                    :: (index: s32) -> *u8                                                                                                               #foreign SDL3 "SDL_GetVideoDriver";
-get_current_video_driver            :: () -> *u8                                                                                                                         #foreign SDL3 "SDL_GetCurrentVideoDriver";
-get_system_theme                    :: () -> System_Theme                                                                                                                #foreign SDL3 "SDL_GetSystemTheme";
-get_displays                        :: (count: *s32) -> *Display_ID                                                                                                      #foreign SDL3 "SDL_GetDisplays";
-get_primary_display                 :: () -> Display_ID                                                                                                                  #foreign SDL3 "SDL_GetPrimaryDisplay";
-get_display_properties              :: (display_id: Display_ID) -> Properties_ID                                                                                         #foreign SDL3 "SDL_GetDisplayProperties";
+WINDOW_SURFACE_VSYNC_DISABLED :: 0;
+WINDOW_SURFACE_VSYNC_ADAPTIVE :: -1;
+
+Hit_Test_Result :: enum u32
+{
+    NORMAL;
+    DRAGGABLE;
+    RESIZE_TOPLEFT;
+    RESIZE_TOP;
+    RESIZE_TOPRIGHT;
+    RESIZE_RIGHT;
+    RESIZE_BOTTOMRIGHT;
+    RESIZE_BOTTOM;
+    RESIZE_BOTTOMLEFT;
+    RESIZE_LEFT;
+}
+
+Hit_Test :: #type (window: *Window, area: *Point, data: *void) -> Hit_Test_Result;
+
+get_num_video_drivers               :: () -> s32                                                                                                                                                                 #foreign SDL3 "SDL_GetNumVideoDrivers";
+get_video_driver                    :: (index: s32) -> *u8                                                                                                                                                       #foreign SDL3 "SDL_GetVideoDriver";
+get_current_video_driver            :: () -> *u8                                                                                                                                                                 #foreign SDL3 "SDL_GetCurrentVideoDriver";
+get_system_theme                    :: () -> System_Theme                                                                                                                                                        #foreign SDL3 "SDL_GetSystemTheme";
+get_displays                        :: (count: *s32) -> *Display_ID                                                                                                                                              #foreign SDL3 "SDL_GetDisplays";
+get_primary_display                 :: () -> Display_ID                                                                                                                                                          #foreign SDL3 "SDL_GetPrimaryDisplay";
+get_display_properties              :: (display_id: Display_ID) -> Properties_ID                                                                                                                                 #foreign SDL3 "SDL_GetDisplayProperties";
+get_display_name                    :: (display_id: Display_ID) -> *u8                                                                                                                                           #foreign SDL3 "SDL_GetDisplayName";
+get_display_bounds                  :: (display_id: Display_ID, rect: *Rect) -> bool                                                                                                                             #foreign SDL3 "SDL_GetDisplayBounds";
+get_display_usable_bounds           :: (display_id: Display_ID, rect: *Rect) -> bool                                                                                                                             #foreign SDL3 "SDL_GetDisplayUsableBounds";
+get_natural_display_orientation     :: (display_id: Display_ID) -> Display_Orientation                                                                                                                           #foreign SDL3 "SDL_GetNaturalDisplayOrientation";
+get_current_display_orientation     :: (display_id: Display_ID) -> Display_Orientation                                                                                                                           #foreign SDL3 "SDL_GetCurrentDisplayOrientation";
+get_display_content_scale           :: (display_id: Display_ID) -> float32                                                                                                                                       #foreign SDL3 "SDL_GetDisplayContentScale";
+get_fullscreen_display_modes        :: (display_id: Display_ID, count: *s32) -> **Display_Mode                                                                                                                   #foreign SDL3 "SDL_GetFullscreenDisplayModes";
+get_closest_fullscreen_display_mode :: (display_id: Display_ID, w: s32, h: s32, refresh_rate: float32, include_high_density_modes: bool, closest: *Display_Mode) -> bool                                         #foreign SDL3 "SDL_GetClosestFullscreenDisplayMode";
+get_desktop_display_mode            :: (display_id: Display_ID) -> *Display_Mode                                                                                                                                 #foreign SDL3 "SDL_GetDesktopDisplayMode";
+get_current_display_mode            :: (display_id: Display_ID) -> *Display_Mode                                                                                                                                 #foreign SDL3 "SDL_GetCurrentDisplayMode";
+get_display_for_point               :: (point: *Point) -> Display_ID                                                                                                                                             #foreign SDL3 "SDL_GetDisplayForPoint";
+get_display_for_rect                :: (rect: *Rect) -> Display_ID                                                                                                                                               #foreign SDL3 "SDL_GetDisplayForRect";
+get_display_for_window              :: (window: *Window) -> Display_ID                                                                                                                                           #foreign SDL3 "SDL_GetDisplayForWindow";
+get_window_pixel_density            :: (window: *Window) -> float32                                                                                                                                              #foreign SDL3 "SDL_GetWindowPixelDensity";
+get_window_display_scale            :: (window: *Window) -> float32                                                                                                                                              #foreign SDL3 "SDL_GetWindowDisplayScale";
+set_window_fullscreen_mode          :: (window: *Window, mode: *Display_Mode) -> bool                                                                                                                            #foreign SDL3 "SDL_SetWindowFullscreenMode";
+get_window_fullscreen_mode          :: (window: *Window) -> *Display_Mode                                                                                                                                        #foreign SDL3 "SDL_GetWindowFullscreenMode";
+get_window_icc_profile              :: (window: *Window, size: *u64) -> *void                                                                                                                                    #foreign SDL3 "SDL_GetWindowICCProfile";
+get_window_pixel_format             :: (window: *Window) -> Pixel_Format                                                                                                                                         #foreign SDL3 "SDL_GetWindowPixelFormat";
+get_windows                         :: (count: *s32) -> **Window                                                                                                                                                 #foreign SDL3 "SDL_GetWindows";
+create_window                       :: (title: *u8, w: s32, h: s32, flags: Window_Flags) -> *Window                                                                                                              #foreign SDL3 "SDL_CreateWindow";
+create_popup_window                 :: (parent: *Window, offset_x: s32, offset_y: s32, w: s32, h: s32, flags: Window_Flags) -> *Window                                                                           #foreign SDL3 "SDL_CreatePopupWindow";
+create_window_with_properties       :: (props: Properties_ID) -> *Window                                                                                                                                         #foreign SDL3 "SDL_CreateWindowWithProperties";
+get_window_id                       :: (window: *Window) -> Window_ID                                                                                                                                            #foreign SDL3 "SDL_GetWindowID";
+get_window_from_id                  :: (id: Window_ID) -> *Window                                                                                                                                                #foreign SDL3 "SDL_GetWindowFromID";
+get_window_parent                   :: (window: *Window) -> *Window                                                                                                                                              #foreign SDL3 "SDL_GetWindowParent";
+get_window_properties               :: (window: *Window) -> Properties_ID                                                                                                                                        #foreign SDL3 "SDL_GetWindowProperties";
+get_window_flags                    :: (window: *Window) -> Window_Flags                                                                                                                                         #foreign SDL3 "SDL_GetWindowFlags";
+set_window_title                    :: (window: *Window, title: *u8) -> bool                                                                                                                                     #foreign SDL3 "SDL_SetWindowTitle";
+get_window_title                    :: (window: *Window) -> *u8                                                                                                                                                  #foreign SDL3 "SDL_GetWindowTitle";
+set_window_icon                     :: (window: *Window, icon: *Surface) -> bool                                                                                                                                 #foreign SDL3 "SDL_SetWindowIcon";
+set_window_position                 :: (window: *Window, x: s32, y: s32) -> bool                                                                                                                                 #foreign SDL3 "SDL_SetWindowPosition";
+get_window_position                 :: (window: *Window, x: *s32, y: *s32) -> bool                                                                                                                               #foreign SDL3 "SDL_GetWindowPosition";
+set_window_size                     :: (window: *Window, w: s32, h: s32) -> bool                                                                                                                                 #foreign SDL3 "SDL_SetWindowSize";
+get_window_size                     :: (window: *Window, w: *s32, h: *s32) -> bool                                                                                                                               #foreign SDL3 "SDL_GetWindowSize";
+get_window_safe_area                :: (window: *Window, rect: *Rect) -> bool                                                                                                                                    #foreign SDL3 "SDL_GetWindowSafeArea";
+set_window_aspect_ratio             :: (window: *Window, min_aspect: float32, max_aspect: float32) -> bool                                                                                                       #foreign SDL3 "SDL_SetWindowAspectRatio";
+get_window_aspect_ratio             :: (window: *Window, min_aspect: *float32, max_aspect: *float32) -> bool                                                                                                     #foreign SDL3 "SDL_GetWindowAspectRatio";
+get_window_borders_size             :: (window: *Window, top: *s32, left: *s32, bottom: *s32, right: *s32) -> bool                                                                                               #foreign SDL3 "SDL_GetWindowBordersSize";
+get_window_size_in_pixels           :: (window: *Window, w: *s32, h: *s32) -> bool                                                                                                                               #foreign SDL3 "SDL_GetWindowSizeInPixels";
+set_window_minimum_size             :: (window: *Window, min_w: s32, min_h: s32) -> bool                                                                                                                         #foreign SDL3 "SDL_SetWindowMinimumSize";
+get_window_minimum_size             :: (window: *Window, w: *s32, h: *s32) -> bool                                                                                                                               #foreign SDL3 "SDL_GetWindowMinimumSize";
+set_window_maximum_size             :: (window: *Window, max_w: s32, max_h: s32) -> bool                                                                                                                         #foreign SDL3 "SDL_SetWindowMaximumSize";
+get_window_maximum_size             :: (window: *Window, w: *s32, h: *s32) -> bool                                                                                                                               #foreign SDL3 "SDL_GetWindowMaximumSize";
+set_window_bordered                 :: (window: *Window, bordered: bool) -> bool                                                                                                                                 #foreign SDL3 "SDL_SetWindowBordered";
+set_window_resizable                :: (window: *Window, resizable: bool) -> bool                                                                                                                                #foreign SDL3 "SDL_SetWindowResizable";
+set_window_always_on_top            :: (window: *Window, on_top: bool) -> bool                                                                                                                                   #foreign SDL3 "SDL_SetWindowAlwaysOnTop";
+show_window                         :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_ShowWindow";
+hide_window                         :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_HideWindow";
+raise_window                        :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_RaiseWindow";
+maximize_window                     :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_MaximizeWindow";
+minimize_window                     :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_MinimizeWindow";
+restore_window                      :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_RestoreWindow";
+set_window_fullscreen               :: (window: *Window, fullscreen: bool) -> bool                                                                                                                               #foreign SDL3 "SDL_SetWindowFullscreen";
+sync_window                         :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_SyncWindow";
+window_has_surface                  :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_WindowHasSurface";
+get_window_surface                  :: (window: *Window) -> *Surface                                                                                                                                             #foreign SDL3 "SDL_GetWindowSurface";
+set_window_surface_v_sync           :: (window: *Window, vsync: s32) -> bool                                                                                                                                     #foreign SDL3 "SDL_SetWindowSurfaceVSync";
+get_window_surface_v_sync           :: (window: *Window, vsync: *s32) -> bool                                                                                                                                    #foreign SDL3 "SDL_GetWindowSurfaceVSync";
+update_window_surface               :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_UpdateWindowSurface";
+update_window_surface_rects         :: (window: *Window, rects: *Rect, num_rects: s32) -> bool                                                                                                                   #foreign SDL3 "SDL_UpdateWindowSurfaceRects";
+destroy_window_surface              :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_DestroyWindowSurface";
+set_window_keyboard_grab            :: (window: *Window, grabbed: bool) -> bool                                                                                                                                  #foreign SDL3 "SDL_SetWindowKeyboardGrab";
+set_window_mouse_grab               :: (window: *Window, grabbed: bool) -> bool                                                                                                                                  #foreign SDL3 "SDL_SetWindowMouseGrab";
+get_window_keyboard_grab            :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_GetWindowKeyboardGrab";
+get_window_mouse_grab               :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_GetWindowMouseGrab";
+get_grabbed_window                  :: () -> *Window                                                                                                                                                             #foreign SDL3 "SDL_GetGrabbedWindow";
+set_window_mouse_rect               :: (window: *Window, rect: *Rect) -> bool                                                                                                                                    #foreign SDL3 "SDL_SetWindowMouseRect";
+get_window_mouse_rect               :: (window: *Window) -> *Rect                                                                                                                                                #foreign SDL3 "SDL_GetWindowMouseRect";
+set_window_opacity                  :: (window: *Window, opacity: float32) -> bool                                                                                                                               #foreign SDL3 "SDL_SetWindowOpacity";
+get_window_opacity                  :: (window: *Window) -> float32                                                                                                                                              #foreign SDL3 "SDL_GetWindowOpacity";
+set_window_parent                   :: (window: *Window, parent: *Window) -> bool                                                                                                                                #foreign SDL3 "SDL_SetWindowParent";
+set_window_modal                    :: (window: *Window, modal: bool) -> bool                                                                                                                                    #foreign SDL3 "SDL_SetWindowModal";
+set_window_focusable                :: (window: *Window, focusable: bool) -> bool                                                                                                                                #foreign SDL3 "SDL_SetWindowFocusable";
+show_window_system_menu             :: (window: *Window, x: s32, y: s32) -> bool                                                                                                                                 #foreign SDL3 "SDL_ShowWindowSystemMenu";
+set_window_hit_test                 :: (window: *Window, callback: Hit_Test, callback_data: *void) -> bool                                                                                                       #foreign SDL3 "SDL_SetWindowHitTest";
+set_window_shape                    :: (window: *Window, shape: *Surface) -> bool                                                                                                                                #foreign SDL3 "SDL_SetWindowShape";
+flash_window                        :: (window: *Window, operation: Flash_Operation) -> bool                                                                                                                     #foreign SDL3 "SDL_FlashWindow";
+destroy_window                      :: (window: *Window)                                                                                                                                                         #foreign SDL3 "SDL_DestroyWindow";
+screen_saver_enabled                :: () -> bool                                                                                                                                                                #foreign SDL3 "SDL_ScreenSaverEnabled";
+enable_screen_saver                 :: () -> bool                                                                                                                                                                #foreign SDL3 "SDL_EnableScreenSaver";
+disable_screen_saver                :: () -> bool                                                                                                                                                                #foreign SDL3 "SDL_DisableScreenSaver";
+gl_load_library                     :: (path: *u8) -> bool                                                                                                                                                       #foreign SDL3 "SDL_GL_LoadLibrary";
+gl_get_proc_address                 :: (proc: *u8) -> Function_Pointer                                                                                                                                           #foreign SDL3 "SDL_GL_GetProcAddress";
+egl_get_proc_address                :: (proc: *u8) -> Function_Pointer                                                                                                                                           #foreign SDL3 "SDL_EGL_GetProcAddress";
+gl_unload_library                   :: ()                                                                                                                                                                        #foreign SDL3 "SDL_GL_UnloadLibrary";
+gl_extension_supported              :: (extension: *u8) -> bool                                                                                                                                                  #foreign SDL3 "SDL_GL_ExtensionSupported";
+gl_reset_attributes                 :: ()                                                                                                                                                                        #foreign SDL3 "SDL_GL_ResetAttributes";
+gl_set_attribute                    :: (attr: GL_Attr, value: s32) -> bool                                                                                                                                       #foreign SDL3 "SDL_GL_SetAttribute";
+gl_get_attribute                    :: (attr: GL_Attr, value: *s32) -> bool                                                                                                                                      #foreign SDL3 "SDL_GL_GetAttribute";
+gl_create_context                   :: (window: *Window) -> GL_Context                                                                                                                                           #foreign SDL3 "SDL_GL_CreateContext";
+gl_make_current                     :: (window: *Window, ctx: GL_Context) -> bool                                                                                                                                #foreign SDL3 "SDL_GL_MakeCurrent";
+gl_get_current_window               :: () -> *Window                                                                                                                                                             #foreign SDL3 "SDL_GL_GetCurrentWindow";
+gl_get_current_context              :: () -> GL_Context                                                                                                                                                          #foreign SDL3 "SDL_GL_GetCurrentContext";
+egl_get_current_display             :: () -> EGL_Display                                                                                                                                                         #foreign SDL3 "SDL_EGL_GetCurrentDisplay";
+egl_get_current_config              :: () -> EGL_Config                                                                                                                                                          #foreign SDL3 "SDL_EGL_GetCurrentConfig";
+egl_get_window_surface              :: (window: *Window) -> EGL_Surface                                                                                                                                          #foreign SDL3 "SDL_EGL_GetWindowSurface";
+egl_set_attribute_callbacks         :: (platform_attrib_callback: EGL_Attrib_Array_Callback, surface_attrib_callback: EGL_Int_Array_Callback, context_attrib_callback: EGL_Int_Array_Callback, user_data: *void) #foreign SDL3 "SDL_EGL_SetAttributeCallbacks";
+gl_set_swap_interval                :: (interval: s32) -> bool                                                                                                                                                   #foreign SDL3 "SDL_GL_SetSwapInterval";
+gl_get_swap_interval                :: (interval: *s32) -> bool                                                                                                                                                  #foreign SDL3 "SDL_GL_GetSwapInterval";
+gl_swap_window                      :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_GL_SwapWindow";
+gl_destroy_context                  :: (ctx: GL_Context) -> bool                                                                                                                                                 #foreign SDL3 "SDL_GL_DestroyContext";
+
+
+PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER :: "SDL.video.wayland.wl_display";
 
 PROP_DISPLAY_HDR_ENABLED_BOOLEAN             :: "SDL.display.HDR_enabled";
 PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER :: "SDL.display.KMSDRM.panel_orientation";
-
-get_display_name                    :: (display_id: Display_ID) -> *u8                                                                                                   #foreign SDL3 "SDL_GetDisplayName";
-get_display_bounds                  :: (display_id: Display_ID, rect: *Rect) -> bool                                                                                     #foreign SDL3 "SDL_GetDisplayBounds";
-get_display_usable_bounds           :: (display_id: Display_ID, rect: *Rect) -> bool                                                                                     #foreign SDL3 "SDL_GetDisplayUsableBounds";
-get_natural_display_orientation     :: (display_id: Display_ID) -> Display_Orientation                                                                                   #foreign SDL3 "SDL_GetNaturalDisplayOrientation";
-get_current_display_orientation     :: (display_id: Display_ID) -> Display_Orientation                                                                                   #foreign SDL3 "SDL_GetCurrentDisplayOrientation";
-get_display_content_scale           :: (display_id: Display_ID) -> float32                                                                                               #foreign SDL3 "SDL_GetDisplayContentScale";
-get_fullscreen_display_modes        :: (display_id: Display_ID, count: *s32) -> **Display_Mode                                                                           #foreign SDL3 "SDL_GetFullscreenDisplayModes";
-get_closest_fullscreen_display_mode :: (display_id: Display_ID, w: s32, h: s32, refresh_rate: float32, include_high_density_modes: bool, closest: *Display_Mode) -> bool #foreign SDL3 "SDL_GetClosestFullscreenDisplayMode";
-get_desktop_display_mode            :: (display_id: Display_ID) -> *Display_Mode                                                                                         #foreign SDL3 "SDL_GetDesktopDisplayMode";
-get_current_display_mode            :: (display_id: Display_ID) -> *Display_Mode                                                                                         #foreign SDL3 "SDL_GetCurrentDisplayMode";
-get_display_for_point               :: (point: *Point) -> Display_ID                                                                                                     #foreign SDL3 "SDL_GetDisplayForPoint";
-get_display_for_rect                :: (rect: *Rect) -> Display_ID                                                                                                       #foreign SDL3 "SDL_GetDisplayForRect";
-get_display_for_window              :: (window: *Window) -> Display_ID                                                                                                   #foreign SDL3 "SDL_GetDisplayForWindow";
-get_window_pixel_density            :: (window: *Window) -> float32                                                                                                      #foreign SDL3 "SDL_GetWindowPixelDensity";
-get_window_display_scale            :: (window: *Window) -> float32                                                                                                      #foreign SDL3 "SDL_GetWindowDisplayScale";
-set_window_fullscreen_mode          :: (window: *Window, mode: *Display_Mode) -> bool                                                                                    #foreign SDL3 "SDL_SetWindowFullscreenMode";
-get_window_fullscreen_mode          :: (window: *Window) -> *Display_Mode                                                                                                #foreign SDL3 "SDL_GetWindowFullscreenMode";
-get_window_icc_profile              :: (window: *Window, size: *u64) -> *void                                                                                            #foreign SDL3 "SDL_GetWindowICCProfile";
-get_window_pixel_format             :: (window: *Window) -> Pixel_Format                                                                                                 #foreign SDL3 "SDL_GetWindowPixelFormat";
-get_windows                         :: (count: *s32) -> **Window                                                                                                         #foreign SDL3 "SDL_GetWindows";
-create_window                       :: (title: *u8, w: s32, h: s32, flags: Window_Flags) -> *Window                                                                      #foreign SDL3 "SDL_CreateWindow";
-create_popup_window                 :: (parent: *Window, offset_x: s32, offset_y: s32, w: s32, h: s32, flags: Window_Flags) -> *Window                                   #foreign SDL3 "SDL_CreatePopupWindow";
-create_window_with_properties       :: (props: Properties_ID) -> *Window                                                                                                 #foreign SDL3 "SDL_CreateWindowWithProperties";
 
 PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN               :: "SDL.window.create.always_on_top";
 PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN                  :: "SDL.window.create.borderless";
@@ -226,11 +324,6 @@ PROP_WINDOW_CREATE_WIN32_HWND_POINTER                  :: "SDL.window.create.win
 PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER     :: "SDL.window.create.win32.pixel_format_hwnd";
 PROP_WINDOW_CREATE_X11_WINDOW_NUMBER                   :: "SDL.window.create.x11.window";
 
-get_window_id                                          :: (window: *Window) -> Window_ID                                                                                 #foreign SDL3 "SDL_GetWindowID";
-get_window_from_id                                     :: (id: Window_ID) -> *Window                                                                                     #foreign SDL3 "SDL_GetWindowFromID";
-get_window_parent                                      :: (window: *Window) -> *Window                                                                                   #foreign SDL3 "SDL_GetWindowParent";
-get_window_properties                                  :: (window: *Window) -> Properties_ID                                                                             #foreign SDL3 "SDL_GetWindowProperties";
-
 PROP_WINDOW_SHAPE_POINTER                              :: "SDL.window.shape";
 PROP_WINDOW_HDR_ENABLED_BOOLEAN                        :: "SDL.window.HDR_enabled";
 PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT                      :: "SDL.window.SDR_white_level";
@@ -266,100 +359,3 @@ PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER             :: "SDL.window.wayland.xd
 PROP_WINDOW_X11_DISPLAY_POINTER                        :: "SDL.window.x11.display";
 PROP_WINDOW_X11_SCREEN_NUMBER                          :: "SDL.window.x11.screen";
 PROP_WINDOW_X11_WINDOW_NUMBER                          :: "SDL.window.x11.window";
-
-get_window_flags            :: (window: *Window) -> Window_Flags                                           #foreign SDL3 "SDL_GetWindowFlags";
-set_window_title            :: (window: *Window, title: *u8) -> bool                                       #foreign SDL3 "SDL_SetWindowTitle";
-get_window_title            :: (window: *Window) -> *u8                                                    #foreign SDL3 "SDL_GetWindowTitle";
-set_window_icon             :: (window: *Window, icon: *Surface) -> bool                                   #foreign SDL3 "SDL_SetWindowIcon";
-set_window_position         :: (window: *Window, x: s32, y: s32) -> bool                                   #foreign SDL3 "SDL_SetWindowPosition";
-get_window_position         :: (window: *Window, x: *s32, y: *s32) -> bool                                 #foreign SDL3 "SDL_GetWindowPosition";
-set_window_size             :: (window: *Window, w: s32, h: s32) -> bool                                   #foreign SDL3 "SDL_SetWindowSize";
-get_window_size             :: (window: *Window, w: *s32, h: *s32) -> bool                                 #foreign SDL3 "SDL_GetWindowSize";
-get_window_safe_area        :: (window: *Window, rect: *Rect) -> bool                                      #foreign SDL3 "SDL_GetWindowSafeArea";
-set_window_aspect_ratio     :: (window: *Window, min_aspect: float32, max_aspect: float32) -> bool         #foreign SDL3 "SDL_SetWindowAspectRatio";
-get_window_aspect_ratio     :: (window: *Window, min_aspect: *float32, max_aspect: *float32) -> bool       #foreign SDL3 "SDL_GetWindowAspectRatio";
-get_window_borders_size     :: (window: *Window, top: *s32, left: *s32, bottom: *s32, right: *s32) -> bool #foreign SDL3 "SDL_GetWindowBordersSize";
-get_window_size_in_pixels   :: (window: *Window, w: *s32, h: *s32) -> bool                                 #foreign SDL3 "SDL_GetWindowSizeInPixels";
-set_window_minimum_size     :: (window: *Window, min_w: s32, min_h: s32) -> bool                           #foreign SDL3 "SDL_SetWindowMinimumSize";
-get_window_minimum_size     :: (window: *Window, w: *s32, h: *s32) -> bool                                 #foreign SDL3 "SDL_GetWindowMinimumSize";
-set_window_maximum_size     :: (window: *Window, max_w: s32, max_h: s32) -> bool                           #foreign SDL3 "SDL_SetWindowMaximumSize";
-get_window_maximum_size     :: (window: *Window, w: *s32, h: *s32) -> bool                                 #foreign SDL3 "SDL_GetWindowMaximumSize";
-set_window_bordered         :: (window: *Window, bordered: bool) -> bool                                   #foreign SDL3 "SDL_SetWindowBordered";
-set_window_resizable        :: (window: *Window, resizable: bool) -> bool                                  #foreign SDL3 "SDL_SetWindowResizable";
-set_window_always_on_top    :: (window: *Window, on_top: bool) -> bool                                     #foreign SDL3 "SDL_SetWindowAlwaysOnTop";
-show_window                 :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_ShowWindow";
-hide_window                 :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_HideWindow";
-raise_window                :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_RaiseWindow";
-maximize_window             :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_MaximizeWindow";
-minimize_window             :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_MinimizeWindow";
-restore_window              :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_RestoreWindow";
-set_window_fullscreen       :: (window: *Window, fullscreen: bool) -> bool                                 #foreign SDL3 "SDL_SetWindowFullscreen";
-sync_window                 :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_SyncWindow";
-window_has_surface          :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_WindowHasSurface";
-get_window_surface          :: (window: *Window) -> *Surface                                               #foreign SDL3 "SDL_GetWindowSurface";
-set_window_surface_v_sync   :: (window: *Window, vsync: s32) -> bool                                       #foreign SDL3 "SDL_SetWindowSurfaceVSync";
-
-WINDOW_SURFACE_VSYNC_DISABLED :: 0;
-WINDOW_SURFACE_VSYNC_ADAPTIVE :: -1;
-
-get_window_surface_v_sync   :: (window: *Window, vsync: *s32) -> bool                                      #foreign SDL3 "SDL_GetWindowSurfaceVSync";
-update_window_surface       :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_UpdateWindowSurface";
-update_window_surface_rects :: (window: *Window, rects: *Rect, num_rects: s32) -> bool                     #foreign SDL3 "SDL_UpdateWindowSurfaceRects";
-destroy_window_surface      :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_DestroyWindowSurface";
-set_window_keyboard_grab    :: (window: *Window, grabbed: bool) -> bool                                    #foreign SDL3 "SDL_SetWindowKeyboardGrab";
-set_window_mouse_grab       :: (window: *Window, grabbed: bool) -> bool                                    #foreign SDL3 "SDL_SetWindowMouseGrab";
-get_window_keyboard_grab    :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_GetWindowKeyboardGrab";
-get_window_mouse_grab       :: (window: *Window) -> bool                                                   #foreign SDL3 "SDL_GetWindowMouseGrab";
-get_grabbed_window          :: () -> *Window                                                               #foreign SDL3 "SDL_GetGrabbedWindow";
-set_window_mouse_rect       :: (window: *Window, rect: *Rect) -> bool                                      #foreign SDL3 "SDL_SetWindowMouseRect";
-get_window_mouse_rect       :: (window: *Window) -> *Rect                                                  #foreign SDL3 "SDL_GetWindowMouseRect";
-set_window_opacity          :: (window: *Window, opacity: float32) -> bool                                 #foreign SDL3 "SDL_SetWindowOpacity";
-get_window_opacity          :: (window: *Window) -> float32                                                #foreign SDL3 "SDL_GetWindowOpacity";
-set_window_parent           :: (window: *Window, parent: *Window) -> bool                                  #foreign SDL3 "SDL_SetWindowParent";
-set_window_modal            :: (window: *Window, modal: bool) -> bool                                      #foreign SDL3 "SDL_SetWindowModal";
-set_window_focusable        :: (window: *Window, focusable: bool) -> bool                                  #foreign SDL3 "SDL_SetWindowFocusable";
-show_window_system_menu     :: (window: *Window, x: s32, y: s32) -> bool                                   #foreign SDL3 "SDL_ShowWindowSystemMenu";
-
-Hit_Test_Result :: enum u32
-{
-    HITTEST_NORMAL;
-    HITTEST_DRAGGABLE;
-    HITTEST_RESIZE_TOPLEFT;
-    HITTEST_RESIZE_TOP;
-    HITTEST_RESIZE_TOPRIGHT;
-    HITTEST_RESIZE_RIGHT;
-    HITTEST_RESIZE_BOTTOMRIGHT;
-    HITTEST_RESIZE_BOTTOM;
-    HITTEST_RESIZE_BOTTOMLEFT;
-    HITTEST_RESIZE_LEFT;
-}
-
-Hit_Test :: #type (window: *Window, area: *Point, data: *void) -> Hit_Test_Result;
-
-set_window_hit_test         :: (window: *Window, callback: Hit_Test, callback_data: *void) -> bool                                                                                                       #foreign SDL3 "SDL_SetWindowHitTest";
-set_window_shape            :: (window: *Window, shape: *Surface) -> bool                                                                                                                                #foreign SDL3 "SDL_SetWindowShape";
-flash_window                :: (window: *Window, operation: Flash_Operation) -> bool                                                                                                                     #foreign SDL3 "SDL_FlashWindow";
-destroy_window              :: (window: *Window)                                                                                                                                                         #foreign SDL3 "SDL_DestroyWindow";
-screen_saver_enabled        :: () -> bool                                                                                                                                                                #foreign SDL3 "SDL_ScreenSaverEnabled";
-enable_screen_saver         :: () -> bool                                                                                                                                                                #foreign SDL3 "SDL_EnableScreenSaver";
-disable_screen_saver        :: () -> bool                                                                                                                                                                #foreign SDL3 "SDL_DisableScreenSaver";
-gl_load_library             :: (path: *u8) -> bool                                                                                                                                                       #foreign SDL3 "SDL_GL_LoadLibrary";
-gl_get_proc_address         :: (proc: *u8) -> Function_Pointer                                                                                                                                           #foreign SDL3 "SDL_GL_GetProcAddress";
-egl_get_proc_address        :: (proc: *u8) -> Function_Pointer                                                                                                                                           #foreign SDL3 "SDL_EGL_GetProcAddress";
-gl_unload_library           :: ()                                                                                                                                                                        #foreign SDL3 "SDL_GL_UnloadLibrary";
-gl_extension_supported      :: (extension: *u8) -> bool                                                                                                                                                  #foreign SDL3 "SDL_GL_ExtensionSupported";
-gl_reset_attributes         :: ()                                                                                                                                                                        #foreign SDL3 "SDL_GL_ResetAttributes";
-gl_set_attribute            :: (attr: GL_Attr, value: s32) -> bool                                                                                                                                       #foreign SDL3 "SDL_GL_SetAttribute";
-gl_get_attribute            :: (attr: GL_Attr, value: *s32) -> bool                                                                                                                                      #foreign SDL3 "SDL_GL_GetAttribute";
-gl_create_context           :: (window: *Window) -> GL_Context                                                                                                                                           #foreign SDL3 "SDL_GL_CreateContext";
-gl_make_current             :: (window: *Window, ctx: GL_Context) -> bool                                                                                                                                #foreign SDL3 "SDL_GL_MakeCurrent";
-gl_get_current_window       :: () -> *Window                                                                                                                                                             #foreign SDL3 "SDL_GL_GetCurrentWindow";
-gl_get_current_context      :: () -> GL_Context                                                                                                                                                          #foreign SDL3 "SDL_GL_GetCurrentContext";
-egl_get_current_display     :: () -> EGL_Display                                                                                                                                                         #foreign SDL3 "SDL_EGL_GetCurrentDisplay";
-egl_get_current_config      :: () -> EGL_Config                                                                                                                                                          #foreign SDL3 "SDL_EGL_GetCurrentConfig";
-egl_get_window_surface      :: (window: *Window) -> EGL_Surface                                                                                                                                          #foreign SDL3 "SDL_EGL_GetWindowSurface";
-egl_set_attribute_callbacks :: (platform_attrib_callback: EGL_Attrib_Array_Callback, surface_attrib_callback: EGL_Int_Array_Callback, context_attrib_callback: EGL_Int_Array_Callback, user_data: *void) #foreign SDL3 "SDL_EGL_SetAttributeCallbacks";
-gl_set_swap_interval        :: (interval: s32) -> bool                                                                                                                                                   #foreign SDL3 "SDL_GL_SetSwapInterval";
-gl_get_swap_interval        :: (interval: *s32) -> bool                                                                                                                                                  #foreign SDL3 "SDL_GL_GetSwapInterval";
-gl_swap_window              :: (window: *Window) -> bool                                                                                                                                                 #foreign SDL3 "SDL_GL_SwapWindow";
-gl_destroy_context          :: (ctx: GL_Context) -> bool                                                                                                                                                 #foreign SDL3 "SDL_GL_DestroyContext";

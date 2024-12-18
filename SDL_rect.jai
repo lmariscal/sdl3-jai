@@ -70,7 +70,6 @@ get_rect_intersection                :: (a: *Rect, b: *Rect, result: *Rect) -> b
 get_rect_union                       :: (a: *Rect, b: *Rect, result: *Rect) -> bool                                     #foreign SDL3 "SDL_GetRectUnion";
 get_rect_enclosing_points            :: (points: *Point, count: s32, clip: *Rect, result: *Rect) -> bool                #foreign SDL3 "SDL_GetRectEnclosingPoints";
 get_rect_and_line_intersection       :: (rect: *Rect, x1: *s32, y1: *s32, x2: *s32, y2: *s32) -> bool                   #foreign SDL3 "SDL_GetRectAndLineIntersection";
-
 has_rect_intersection_float          :: (a: *F_Rect, b: *F_Rect) -> bool                                                #foreign SDL3 "SDL_HasRectIntersectionFloat";
 get_rect_intersection_float          :: (a: *F_Rect, b: *F_Rect, result: *F_Rect) -> bool                               #foreign SDL3 "SDL_GetRectIntersectionFloat";
 get_rect_union_float                 :: (a: *F_Rect, b: *F_Rect, result: *F_Rect) -> bool                               #foreign SDL3 "SDL_GetRectUnionFloat";

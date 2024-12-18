@@ -10,20 +10,20 @@ DEFINE_AUDIO_FORMAT :: (signed: u16, big_endian: u16, flt: u16, size: u16) -> u1
 
 Audio_Format :: enum u32
 {
-    AUDIO_UNKNOWN   :: 0x0000;
-    AUDIO_U8        :: 0x0008;
-    AUDIO_S8        :: 0x8008;
-    AUDIO_S16LE     :: 0x8010;
-    AUDIO_S16BE     :: 0x9010;
-    AUDIO_S32LE     :: 0x8020;
-    AUDIO_S32BE     :: 0x9020;
-    AUDIO_F32LE     :: 0x8120;
-    AUDIO_F32BE     :: 0x9120;
+    UNKNOWN   :: 0x0000;
+    U8        :: 0x0008;
+    S8        :: 0x8008;
+    S16LE     :: 0x8010;
+    S16BE     :: 0x9010;
+    S32LE     :: 0x8020;
+    S32BE     :: 0x9020;
+    F32LE     :: 0x8120;
+    F32BE     :: 0x9120;
 
     // #if BYTEORDER == LIL_ENDIAN
-    AUDIO_S16:: 0x8010;
-    AUDIO_S32:: 0x8020;
-    AUDIO_F32:: 0x8120;
+    S16:: 0x8010;
+    S32:: 0x8020;
+    F32:: 0x8120;
 
     // #if BYTEORDER != LIL_ENDIAN
     // AUDIO_S16 :: 0x9010;
@@ -44,8 +44,8 @@ AUDIO_FRAMESIZE      :: (x: Audio_Spec) -> u32 #expand {return AUDIO_BYTESIZE(xx
 
 Audio_Device_ID :: enum_flags u32
 {
-    AUDIO_DEVICE_DEFAULT_PLAYBACK  :: 0xFFFFFFFF;
-    AUDIO_DEVICE_DEFAULT_RECORDING :: 0xFFFFFFFE;
+    PLAYBACK  :: 0xFFFFFFFF;
+    RECORDING :: 0xFFFFFFFE;
 }
 
 Audio_Spec :: struct
@@ -56,6 +56,9 @@ Audio_Spec :: struct
 }
 
 Audio_Stream :: void;
+
+Audio_Stream_Callback :: #type (userdata: *void, stream: *Audio_Stream, additional_amount: s32, total_amount: s32);
+Audio_Postmix_Callback :: #type (userdata: *void, spec: Audio_Spec, buffer: *float32, buflen: s32);
 
 get_num_audio_drivers               :: () -> s32                                                                                                          #foreign SDL3 "SDL_GetNumAudioDrivers";
 get_audio_driver                    :: (index: s32) -> *u8                                                                                                #foreign SDL3 "SDL_GetAudioDriver";
@@ -78,7 +81,7 @@ unbind_audio_streams                :: (streams: **Audio_Stream, num_streams: s3
 unbind_audio_stream                 :: (stream: *Audio_Stream)                                                                                            #foreign SDL3 "SDL_UnbindAudioStream";
 get_audio_stream_device             :: (stream: *Audio_Stream) -> Audio_Device_ID                                                                         #foreign SDL3 "SDL_GetAudioStreamDevice";
 create_audio_stream                 :: (src_spec: *Audio_Spec, dst_spec: *Audio_Spec) -> *Audio_Stream                                                    #foreign SDL3 "SDL_CreateAudioStream";
-get_audio_stream_properties         :: (stream: *Audio_Stream) -> Properties_ID                                                                            #foreign SDL3 "SDL_GetAudioStreamProperties";
+get_audio_stream_properties         :: (stream: *Audio_Stream) -> Properties_ID                                                                           #foreign SDL3 "SDL_GetAudioStreamProperties";
 get_audio_stream_format             :: (stream: *Audio_Stream, src_spec: *Audio_Spec, dst_spec: *Audio_Spec) -> bool                                      #foreign SDL3 "SDL_GetAudioStreamFormat";
 set_audio_stream_format             :: (stream: *Audio_Stream, src_spec: *Audio_Spec, dst_spec: *Audio_Spec) -> bool                                      #foreign SDL3 "SDL_SetAudioStreamFormat";
 get_audio_stream_frequency_ratio    :: (stream: *Audio_Stream) -> float32                                                                                 #foreign SDL3 "SDL_GetAudioStreamFrequencyRatio";
@@ -99,16 +102,12 @@ pause_audio_stream_device           :: (stream: *Audio_Stream) -> bool          
 resume_audio_stream_device          :: (stream: *Audio_Stream) -> bool                                                                                    #foreign SDL3 "SDL_ResumeAudioStreamDevice";
 lock_audio_stream                   :: (stream: *Audio_Stream) -> bool                                                                                    #foreign SDL3 "SDL_LockAudioStream";
 unlock_audio_stream                 :: (stream: *Audio_Stream) -> bool                                                                                    #foreign SDL3 "SDL_UnlockAudioStream";
-
-Audio_Stream_Callback :: #type (userdata: *void, stream: *Audio_Stream, additional_amount: s32, total_amount: s32);
 set_audio_stream_get_callback       :: (stream: *Audio_Stream, callback: Audio_Stream_Callback, userdata: *void) -> bool                                  #foreign SDL3 "SDL_SetAudioStreamGetCallback";
 set_audio_stream_put_callback       :: (stream: *Audio_Stream, callback: Audio_Stream_Callback, userdata: *void) -> bool                                  #foreign SDL3 "SDL_SetAudioStreamPutCallback";
 destroy_audio_stream                :: (stream: *Audio_Stream)                                                                                            #foreign SDL3 "SDL_DestroyAudioStream";
 open_audio_device_stream            :: (dev_id: Audio_Device_ID, spec: *Audio_Spec, callback: Audio_Stream_Callback, userdata: *void) -> *Audio_Stream    #foreign SDL3 "SDL_OpenAudioDeviceStream";
-
-Audio_Postmix_Callback :: #type (userdata: *void, spec: Audio_Spec, buffer: *float32, buflen: s32);
 set_audio_postmix_callback          :: (dev_id: Audio_Device_ID, callback: Audio_Postmix_Callback, userdata: *void) -> bool                               #foreign SDL3 "SDL_SetAudioPostmixCallback";
-load_wav_io                         :: (src: *IO_Stream, close_io: bool, spec: *Audio_Spec, audio_buf: **u8, audio_len: *u32) -> bool                      #foreign SDL3 "SDL_LoadWAV_IO";
+load_wav_io                         :: (src: *IO_Stream, close_io: bool, spec: *Audio_Spec, audio_buf: **u8, audio_len: *u32) -> bool                     #foreign SDL3 "SDL_LoadWAV_IO";
 load_wav                            :: (path: *u8, spec: *Audio_Spec, audio_buf: **u8, audio_len: *u32) -> bool                                           #foreign SDL3 "SDL_LoadWAV";
 mix_audio                           :: (dst: *u8, src: *u8, format: Audio_Format, len: u32, volume: float32) -> bool                                      #foreign SDL3 "SDL_MixAudio";
 convert_audio_samples               :: (src_spec: *Audio_Spec, src_data: *u8, src_len: s32, dst_spec: *Audio_Spec, dst_data: **u8, dst_len: *s32) -> bool #foreign SDL3 "SDL_ConvertAudioSamples";
