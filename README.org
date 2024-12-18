@@ -13,6 +13,8 @@ In this branch I have attempted to modify the standard bindings to make them eas
   IMG :: #import "SDL3/image";
   #+end_src
 
+If you prefer to work with the standard prefixed bindings, please checkout the 'prefixed' branch; however, I will probably not keep this one up-to-date.
+
 * SDL3 source
 - https://github.com/libsdl-org/SDL/tree/main/include/SDL3
 
