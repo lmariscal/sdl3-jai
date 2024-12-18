@@ -2,10 +2,16 @@
 
 Jai bindings for SDL3. Work in progress.
 
-In this branch I have attempted to modify the standard bindings to make them easier to work with in Jai programgs:
+In this branch I have attempted to modify the standard bindings to make them easier to work with in Jai programs:
 - Remove SDL_ prefix from all bindings, so module can be imported into an SDL namespace if desired without an ugly duplicated prefix.
-- snake_case for all function calls.
+- snake_case for all function calls, Upper_Snake_Case for structs/enums.
 - All numeric constants that otherwise behave like enums are now just enums/enum flags. This removes the guesswork when deciding whether or not the unary dot syntax should be used for a particular flag.
+- Removed redundant prefixes from enums for readability.
+- Moved SDL_image into separate module. Can be imported like (namespace optional):
+  #+begin_src
+  SDL :: #import "SDL3";
+  IMG :: #import "SDL3/image";
+  #+end_src
 
 * SDL3 source
 - https://github.com/libsdl-org/SDL/tree/main/include/SDL3
@@ -33,33 +39,33 @@ cmake --build . --config Release
 #+end_src
 
 * Finished
-- SDL_platform.jai
+- SDL_image.jai
+- SDL_gpu.jai
+- SDL_timer.jai
+- SDL_rect.jai
+- SDL_audio.jai
+- SDL_power.jai
+- SDL_render.jai
 - SDL_video.jai
 - SDL_events.jai
 - SDL_init.jai
-- SDL_gpu.jai
+- SDL_scancode.jai
+- SDL_error.jai
 - SDL_surface.jai
-- SDL_rect.jai
-- SDL_render.jai
+- SDL_keyboard.jai
+- SDL_mouse.jai
+- SDL_keycode.jai
+- SDL_platform.jai
+
+* Unfinished
 - SDL_camera.jai
 - SDL_touch.jai
 - SDL_joystick.jai
-- SDL_audio.jai
 - SDL_pen.jai
 - SDL_sensor.jai
 - SDL_pixels.jai
 - SDL_stdinc.jai
 - SDL_properties.jai
-- SDL_timer.jai
-- SDL_power.jai
-- SDL_error.jai
-- SDL_scancode.jai
-- SDL_mouse.jai
-- SDL_keyboard.jai
-- SDL_filesystem.jai
-- SDL_iostream.jai
 - SDL_blendmode.jai
-- SDL_keycode.jai
-
-* Unfinished
-- SDL_image.jai
+- SDL_iostream.jai
+- SDL_filesystem.jai
