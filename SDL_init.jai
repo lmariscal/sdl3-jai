@@ -22,7 +22,7 @@ AppIterate_func :: #type (appstate: *void) -> App_Result;
 AppEvent_func   :: #type (appstate: *void, event: *Event) -> App_Result;
 AppQuit_func    :: #type (appstate: *void, result: App_Result);
 
-init                      :: (flags: u32) -> bool                            #foreign SDL3 "SDL_Init";
+init                      :: (flags: Init_Flags) -> bool                            #foreign SDL3 "SDL_Init";
 init_subsystem            :: (flags: Init_Flags) -> bool                            #foreign SDL3 "SDL_InitSubSystem";
 quit_subsystem            :: (flags: Init_Flags)                                    #foreign SDL3 "SDL_QuitSubSystem";
 was_init                  :: (flags: Init_Flags) -> Init_Flags                      #foreign SDL3 "SDL_WasInit";
