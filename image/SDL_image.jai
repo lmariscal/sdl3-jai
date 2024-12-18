@@ -1,11 +1,11 @@
 Init_Flags   :: enum_flags u32
 {
-    JPG  :u32: 0x00000001;
-    PNG  :u32: 0x00000002;
-    TIF  :u32: 0x00000004;
-    WEBP :u32: 0x00000008;
-    JXL  :u32: 0x00000010;
-    AVIF :u32: 0x00000020;
+    JPG  :: 0x00000001;
+    PNG  :: 0x00000002;
+    TIF  :: 0x00000004;
+    WEBP :: 0x00000008;
+    JXL  :: 0x00000010;
+    AVIF :: 0x00000020;
 }
 
 Animation :: struct
