@@ -1,1 +1,1 @@
-SDL_PropertiesID :: u32;
+Properties_ID :: u32;

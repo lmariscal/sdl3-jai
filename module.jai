@@ -27,16 +27,22 @@
 #load "SDL_iostream.jai";
 #load "SDL_gpu.jai";
 #load "SDL_filesystem.jai";
-#load "SDL_image.jai";
+// #load "SDL_image.jai";
 
 #scope_export
 
 #if OS == .LINUX
 {
-    #import "X11";
+    X11 :: #import "X11";
     SDL3       :: #library "linux/libSDL3";
     SDL3_image :: #library "linux/libSDL3_image";
     #library,system,link_always "libdl";
     #library,system,link_always "libm";
     #library,system,link_always "libpthread";
 }
+
+main :: () {}
+
+// Local Variables:
+// compile-command: "jai module.jai"
+// End:

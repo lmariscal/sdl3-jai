@@ -1,2 +1,2 @@
-SDL_TouchID  :: u64;
-SDL_FingerID :: u64;
+Touch_ID  :: u64;
+Finger_ID :: u64;

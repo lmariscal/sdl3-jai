@@ -1,29 +1,30 @@
-SDL_SurfaceFlags :: u32;
-
-SDL_SURFACE_PREALLOCATED :: 0x00000001;
-SDL_SURFACE_LOCK_NEEDED  :: 0x00000002;
-SDL_SURFACE_LOCKED       :: 0x00000004;
-SDL_SURFACE_SIMD_ALIGNED :: 0x00000008;
-
-// SDL_MUSTLOCK :: (s: *SDL_Surface) -> bool {return (s.flags & SDL_SURFACE_LOCK_NEEDED) == SDL_SURFACE_LOCK_NEEDED;}
-
-SDL_ScaleMode :: enum u32
+Surface_Flags :: enum_flags u32
 {
-    SDL_SCALEMODE_NEAREST;
-    SDL_SCALEMODE_LINEAR;
+    SURFACE_PREALLOCATED :: 0x00000001;
+    SURFACE_LOCK_NEEDED  :: 0x00000002;
+    SURFACE_LOCKED       :: 0x00000004;
+    SURFACE_SIMD_ALIGNED :: 0x00000008;
 }
 
-SDL_FlipMode :: enum u32
+// MUSTLOCK :: (s: *Surface) -> bool {return (s.flags & SURFACE_LOCK_NEEDED) == SURFACE_LOCK_NEEDED;}
+
+Scale_Mode :: enum u32
 {
-    SDL_FLIP_NONE;
-    SDL_FLIP_HORIZONTAL;
-    SDL_FLIP_VERTICAL;
+    SCALEMODE_NEAREST;
+    SCALEMODE_LINEAR;
 }
 
-SDL_Surface :: struct
+Flip_Mode :: enum u32
 {
-    flags:    SDL_SurfaceFlags;
-    format:   SDL_PixelFormat;
+    FLIP_NONE;
+    FLIP_HORIZONTAL;
+    FLIP_VERTICAL;
+}
+
+Surface :: struct
+{
+    flags:    Surface_Flags;
+    format:   Pixel_Format;
     w:        s32;
     h:        s32;
     pitch:    s32;
@@ -33,100 +34,70 @@ SDL_Surface :: struct
     reserved: *void;
 }
 
-// SDL_Surface :: void;
+// Surface :: void;
 
 
-SDL_CreateSurface                :: (width: s32, height: s32, format: SDL_PixelFormat) -> *SDL_Surface  #foreign SDL3;
-SDL_CreateSurfaceFrom            :: (width: s32, height: s32, format: SDL_PixelFormat,
-                                     pixels: *void, pitch: s32) -> *SDL_Surface                         #foreign SDL3;
-SDL_DestroySurface               :: (surface: *SDL_Surface)                                             #foreign SDL3;
-SDL_GetSurfaceProperties         :: (surface: *SDL_Surface) -> SDL_PropertiesID                         #foreign SDL3;
+create_surface                  :: (width: s32, height: s32, format: Pixel_Format) -> *Surface                                                                                                                              #foreign SDL3 "SDL_CreateSurface";
+create_surface_from             :: (width: s32, height: s32, format: Pixel_Format, pixels: *void, pitch: s32) -> *Surface                                                                                                   #foreign SDL3 "SDL_CreateSurfaceFrom";
+destroy_surface                 :: (surface: *Surface)                                                                                                                                                                      #foreign SDL3 "SDL_DestroySurface";
+get_surface_properties          :: (surface: *Surface) -> Properties_ID                                                                                                                                                     #foreign SDL3 "SDL_GetSurfaceProperties";
+set_surface_colorspace          :: (surface: *Surface, colorspace: Colorspace) -> bool                                                                                                                                      #foreign SDL3 "SDL_SetSurfaceColorspace";
+get_surface_colorspace          :: (surface: *Surface) -> Colorspace                                                                                                                                                        #foreign SDL3 "SDL_GetSurfaceColorspace";
+create_surface_palette          :: (surface: *Surface) -> *Palette                                                                                                                                                          #foreign SDL3 "SDL_CreateSurfacePalette";
+set_surface_palette             :: (surface: *Surface, palette: *Palette) -> bool                                                                                                                                           #foreign SDL3 "SDL_SetSurfacePalette";
+get_surface_palette             :: (surface: *Surface) -> *Palette                                                                                                                                                          #foreign SDL3 "SDL_GetSurfacePalette";
+add_surface_alternate_image     :: (surface: *Surface, image: *Surface) -> bool                                                                                                                                             #foreign SDL3 "SDL_AddSurfaceAlternateImage";
+surface_has_alternate_images    :: (surface: *Surface) -> bool                                                                                                                                                              #foreign SDL3 "SDL_SurfaceHasAlternateImages";
+get_surface_images              :: (surface: *Surface, count: *s32) -> **Surface                                                                                                                                            #foreign SDL3 "SDL_GetSurfaceImages";
+remove_surface_alternate_images :: (surface: *Surface)                                                                                                                                                                      #foreign SDL3 "SDL_RemoveSurfaceAlternateImages";
+lock_surface                    :: (surface: *Surface) -> bool                                                                                                                                                              #foreign SDL3 "SDL_LockSurface";
+unlock_surface                  :: (surface: *Surface)                                                                                                                                                                      #foreign SDL3 "SDL_UnlockSurface";
+load_bmp_io                     :: (src: *IO_Stream, close_io: bool) -> *Surface                                                                                                                                            #foreign SDL3 "SDL_LoadBMP_IO";
+load_bmp                        :: (file: *u8) -> *Surface                                                                                                                                                                  #foreign SDL3 "SDL_LoadBMP";
+save_bmp_io                     :: (surface: *Surface, dst: *IO_Stream, close_io: bool) -> bool                                                                                                                             #foreign SDL3 "SDL_SaveBMP_IO";
+save_bmp                        :: (surface: *Surface, file: *u8) -> bool                                                                                                                                                   #foreign SDL3 "SDL_SaveBMP";
+set_surface_rle                 :: (surface: *Surface, enabled: bool) -> bool                                                                                                                                               #foreign SDL3 "SDL_SetSurfaceRLE";
+surface_has_rle                 :: (surface: *Surface) -> bool                                                                                                                                                              #foreign SDL3 "SDL_SurfaceHasRLE";
+set_surface_color_key           :: (surface: *Surface, enabled: bool, key: u32) -> bool                                                                                                                                     #foreign SDL3 "SDL_SetSurfaceColorKey";
+surface_has_color_key           :: (surface: *Surface) -> bool                                                                                                                                                              #foreign SDL3 "SDL_SurfaceHasColorKey";
+get_surface_color_key           :: (surface: *Surface, key: *u32) -> bool                                                                                                                                                   #foreign SDL3 "SDL_GetSurfaceColorKey";
+set_surface_color_mod           :: (surface: *Surface, r: u8, g: u8, b: u8) -> bool                                                                                                                                         #foreign SDL3 "SDL_SetSurfaceColorMod";
+get_surface_color_mod           :: (surface: *Surface, r: *u8, g: *u8, b: *u8) -> bool                                                                                                                                      #foreign SDL3 "SDL_GetSurfaceColorMod";
+set_surface_alpha_mod           :: (surface: *Surface, alpha: u8) -> bool                                                                                                                                                   #foreign SDL3 "SDL_SetSurfaceAlphaMod";
+get_surface_alpha_mod           :: (surface: *Surface, alpha: *u8) -> bool                                                                                                                                                  #foreign SDL3 "SDL_GetSurfaceAlphaMod";
+set_surface_blend_mode          :: (surface: *Surface, blend_mode: Blend_Mode) -> bool                                                                                                                                      #foreign SDL3 "SDL_SetSurfaceBlendMode";
+get_surface_blend_mode          :: (surface: *Surface, blend_mode: *Blend_Mode) -> bool                                                                                                                                     #foreign SDL3 "SDL_GetSurfaceBlendMode";
+set_surface_clip_rect           :: (surface: *Surface, rect: *Rect) -> bool                                                                                                                                                 #foreign SDL3 "SDL_SetSurfaceClipRect";
+get_surface_clip_rect           :: (surface: *Surface, rect: *Rect) -> bool                                                                                                                                                 #foreign SDL3 "SDL_GetSurfaceClipRect";
+flip_surface                    :: (surface: *Surface, flip: Flip_Mode) -> bool                                                                                                                                             #foreign SDL3 "SDL_FlipSurface";
+duplicate_surface               :: (surface: *Surface) -> *Surface                                                                                                                                                          #foreign SDL3 "SDL_DuplicateSurface";
+scale_surface                   :: (surface: *Surface, width: s32, height: s32, scale_mode: Scale_Mode) -> *Surface                                                                                                         #foreign SDL3 "SDL_ScaleSurface";
+convert_surface                 :: (surface: *Surface, format: Pixel_Format) -> *Surface                                                                                                                                    #foreign SDL3 "SDL_ConvertSurface";
+convert_surface_and_colorspace  :: (surface: *Surface, format: Pixel_Format, palette: *Palette, colorspace: Colorspace, props: Properties_ID) -> *Surface                                                                   #foreign SDL3 "SDL_ConvertSurfaceAndColorspace";
+convert_pixels                  :: (width: s32, height: s32, src_format: Pixel_Format, src: *void, src_pitch: s32, dst_format: Pixel_Format, dst: *void, dst_pitch: s32) -> bool                                            #foreign SDL3 "SDL_ConvertPixels";
+
+convert_pixels_and_colorspace   :: (width: s32, height: s32, src_format: Pixel_Format, src_colorspace: Colorspace, src_properties: Properties_ID, src: *void, src_pitch: s32, dst_format: Pixel_Format, dst_colorspace: Colorspace, dst_properties: Properties_ID, dst: *void, dst_pitch: s32) -> bool #foreign SDL3 "SDL_ConvertPixelsAndColorspace";
+
+premultiply_alpha               :: (width: s32, height: s32, src_format: Pixel_Format, src: *void, src_pitch: s32, dst_format: Pixel_Format, dst: *void, dst_pitch: s32, linear: bool) -> bool                              #foreign SDL3 "SDL_PremultiplyAlpha";
+premultiply_surface_alpha       :: (surface: *Surface, linear: bool) -> bool                                                                                                                                                #foreign SDL3 "SDL_PremultiplySurfaceAlpha";
+clear_surface                   :: (surface: *Surface, r: float32, g: float32, b: float32, a: float32) -> bool                                                                                                              #foreign SDL3 "SDL_ClearSurface";
+fill_surface_rect               :: (dst: *Surface, rect: *Rect, color: u32) -> bool                                                                                                                                         #foreign SDL3 "SDL_FillSurfaceRect";
+fill_surface_rects              :: (dst: *Surface, rects: *Rect, color: u32) -> bool                                                                                                                                        #foreign SDL3 "SDL_FillSurfaceRects";
+blit_surface                    :: (src: *Surface, src_rect: *Rect, dst: *Surface, dst_rect: *Rect) -> bool                                                                                                                 #foreign SDL3 "SDL_BlitSurface";
+blit_surface_unchecked          :: (src: *Surface, src_rect: *Rect, dst: *Surface, dst_rect: *Rect) -> bool                                                                                                                 #foreign SDL3 "SDL_BlitSurfaceUnchecked";
+blit_surface_scaled             :: (src: *Surface, src_rect: *Rect, dst: *Surface, dst_rect: *Rect, scale_mode: Scale_Mode) -> bool                                                                                         #foreign SDL3 "SDL_BlitSurfaceScaled";
+blit_surface_unchecked_scaled   :: (src: *Surface, src_rect: *Rect, dst: *Surface, dst_rect: *Rect, scale_mode: Scale_Mode) -> bool                                                                                         #foreign SDL3 "SDL_BlitSurfaceUncheckedScaled";
+blit_surface_tiled              :: (src: *Surface, src_rect: *Rect, dst: *Surface, dst_rect: *Rect) -> bool                                                                                                                 #foreign SDL3 "SDL_BlitSurfaceTiled";
+blit_surface_tiled_with_scale   :: (src: *Surface, src_rect: *Rect, scale: float32, scale_mode: Scale_Mode, dst: *Surface, dst_rect: *Rect) -> bool                                                                         #foreign SDL3 "SDL_BlitSurfaceTiledWithScale";
+blit_surface9_grid              :: (src: *Surface, src_rect: *Rect, left_width: s32, right_width: s32, top_height: s32, bottom_height: s32, scale: float32, scale_mode: Scale_Mode, dst: *Surface, dst_rect: *Rect) -> bool #foreign SDL3 "SDL_BlitSurface9Grid";
+map_surface_rgb                 :: (surface: *Surface, r: u8, g: u8, b: u8) -> u32                                                                                                                                          #foreign SDL3 "SDL_MapSurfaceRGB";
+map_surface_rgba                :: (surface: *Surface, r: u8, g: u8, b: u8, a: u8) -> u32                                                                                                                                   #foreign SDL3 "SDL_MapSurfaceRGBA";
+read_surface_pixel              :: (surface: *Surface, x: s32, y: s32, r: *u8, g: *u8, b: *u8, a: *u8) -> bool                                                                                                              #foreign SDL3 "SDL_ReadSurfacePixel";
+read_surface_pixel_float        :: (surface: *Surface, x: s32, y: s32, r: *float32, g: *float32, b: *float32, a: *float32) -> bool                                                                                          #foreign SDL3 "SDL_ReadSurfacePixelFloat";
+write_surface_pixel             :: (surface: *Surface, x: s32, y: s32, r: u8, g: u8, b: u8, a: u8) -> bool                                                                                                                  #foreign SDL3 "SDL_WriteSurfacePixel";
+write_surface_pixel_float       :: (surface: *Surface, x: s32, y: s32, r: float32, g: float32, b: float32, a: float32) -> bool                                                                                              #foreign SDL3 "SDL_WriteSurfacePixelFloat";
 
 
-SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT              :: "SDL.surface.SDR_white_point";
-SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT                 :: "SDL.surface.HDR_headroom";
-SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING            :: "SDL.surface.tonemap";
-
-SDL_SetSurfaceColorspace         :: (surface: *SDL_Surface, colorspace: SDL_Colorspace) -> bool         #foreign SDL3;
-SDL_GetSurfaceColorspace         :: (surface: *SDL_Surface) -> SDL_Colorspace                           #foreign SDL3;
-SDL_CreateSurfacePalette         :: (surface: *SDL_Surface) -> *SDL_Palette                             #foreign SDL3;
-SDL_SetSurfacePalette            :: (surface: *SDL_Surface, palette: *SDL_Palette) -> bool              #foreign SDL3;
-SDL_GetSurfacePalette            :: (surface: *SDL_Surface) -> *SDL_Palette                             #foreign SDL3;
-SDL_AddSurfaceAlternateImage     :: (surface: *SDL_Surface, image: *SDL_Surface) -> bool                #foreign SDL3;
-SDL_SurfaceHasAlternateImages    :: (surface: *SDL_Surface) -> bool                                     #foreign SDL3;
-SDL_GetSurfaceImages             :: (surface: *SDL_Surface, count: *s32) -> **SDL_Surface               #foreign SDL3;
-SDL_RemoveSurfaceAlternateImages :: (surface: *SDL_Surface)                                             #foreign SDL3;
-SDL_LockSurface                  :: (surface: *SDL_Surface) -> bool                                     #foreign SDL3;
-SDL_UnlockSurface                :: (surface: *SDL_Surface)                                             #foreign SDL3;
-SDL_LoadBMP_IO                   :: (src: *SDL_IOStream, close_io: bool) -> *SDL_Surface                #foreign SDL3;
-SDL_LoadBMP                      :: (file: *u8) -> *SDL_Surface                                         #foreign SDL3;
-SDL_SaveBMP_IO                   :: (surface: *SDL_Surface, dst: *SDL_IOStream, close_io: bool) -> bool #foreign SDL3;
-SDL_SaveBMP                      :: (surface: *SDL_Surface, file: *u8) -> bool                          #foreign SDL3;
-SDL_SetSurfaceRLE                :: (surface: *SDL_Surface, enabled: bool) -> bool                      #foreign SDL3;
-SDL_SurfaceHasRLE                :: (surface: *SDL_Surface) -> bool                                     #foreign SDL3;
-SDL_SetSurfaceColorKey           :: (surface: *SDL_Surface, enabled: bool, key: u32) -> bool            #foreign SDL3;
-SDL_SurfaceHasColorKey           :: (surface: *SDL_Surface) -> bool                                     #foreign SDL3;
-SDL_GetSurfaceColorKey           :: (surface: *SDL_Surface, key: *u32) -> bool                          #foreign SDL3;
-SDL_SetSurfaceColorMod           :: (surface: *SDL_Surface, r: u8, g: u8, b: u8) -> bool                #foreign SDL3;
-SDL_GetSurfaceColorMod           :: (surface: *SDL_Surface, r: *u8, g: *u8, b: *u8) -> bool             #foreign SDL3;
-SDL_SetSurfaceAlphaMod           :: (surface: *SDL_Surface, alpha: u8) -> bool                          #foreign SDL3;
-SDL_GetSurfaceAlphaMod           :: (surface: *SDL_Surface, alpha: *u8) -> bool                         #foreign SDL3;
-SDL_SetSurfaceBlendMode          :: (surface: *SDL_Surface, blend_mode: SDL_BlendMode) -> bool          #foreign SDL3;
-SDL_GetSurfaceBlendMode          :: (surface: *SDL_Surface, blend_mode: *SDL_BlendMode) -> bool         #foreign SDL3;
-SDL_SetSurfaceClipRect           :: (surface: *SDL_Surface, rect: *SDL_Rect) -> bool                    #foreign SDL3;
-SDL_GetSurfaceClipRect           :: (surface: *SDL_Surface, rect: *SDL_Rect) -> bool                    #foreign SDL3;
-SDL_FlipSurface                  :: (surface: *SDL_Surface, flip: SDL_FlipMode) -> bool                 #foreign SDL3;
-SDL_DuplicateSurface             :: (surface: *SDL_Surface) -> *SDL_Surface                             #foreign SDL3;
-SDL_ScaleSurface                 :: (surface: *SDL_Surface, width: s32, height: s32,
-                                     scale_mode: SDL_ScaleMode) -> *SDL_Surface                         #foreign SDL3;
-SDL_ConvertSurface               :: (surface: *SDL_Surface, format: SDL_PixelFormat) -> *SDL_Surface    #foreign SDL3;
-SDL_ConvertSurfaceAndColorspace  :: (surface: *SDL_Surface, format: SDL_PixelFormat,
-                                     palette: *SDL_Palette, colorspace: SDL_Colorspace,
-                                     props: SDL_PropertiesID) -> *SDL_Surface                           #foreign SDL3;
-SDL_ConvertPixels                :: (width: s32, height: s32,
-                                     src_format: SDL_PixelFormat, src: *void, src_pitch: s32,
-                                     dst_format: SDL_PixelFormat, dst: *void, dst_pitch: s32) -> bool   #foreign SDL3;
-SDL_ConvertPixelsAndColorspace   :: (width: s32, height: s32,
-                                     src_format: SDL_PixelFormat, src_colorspace: SDL_Colorspace,
-                                     src_properties: SDL_PropertiesID, src: *void, src_pitch: s32,
-                                  dst_format: SDL_PixelFormat, dst_colorspace: SDL_Colorspace,
-                                  dst_properties: SDL_PropertiesID, dst: *void, dst_pitch: s32) -> bool #foreign SDL3;
-SDL_PremultiplyAlpha             :: (width: s32, height: s32,
-                                     src_format: SDL_PixelFormat, src: *void, src_pitch: s32,
-                                     dst_format: SDL_PixelFormat, dst: *void, dst_pitch: s32,
-                                     linear: bool) -> bool                                              #foreign SDL3;
-SDL_PremultiplySurfaceAlpha      :: (surface: *SDL_Surface, linear: bool) -> bool                       #foreign SDL3;
-SDL_ClearSurface                 :: (surface: *SDL_Surface,
-                                     r: float32, g: float32, b: float32, a: float32) -> bool            #foreign SDL3;
-SDL_FillSurfaceRect              :: (dst: *SDL_Surface, rect: *SDL_Rect, color: u32) -> bool            #foreign SDL3;
-SDL_FillSurfaceRects             :: (dst: *SDL_Surface, rects: *SDL_Rect, color: u32) -> bool           #foreign SDL3;
-SDL_BlitSurface                  :: (src: *SDL_Surface, src_rect: *SDL_Rect,
-                                     dst: *SDL_Surface, dst_rect: *SDL_Rect) -> bool                    #foreign SDL3;
-SDL_BlitSurfaceUnchecked         :: (src: *SDL_Surface, src_rect: *SDL_Rect,
-                                     dst: *SDL_Surface, dst_rect: *SDL_Rect) -> bool                    #foreign SDL3;
-SDL_BlitSurfaceScaled            :: (src: *SDL_Surface, src_rect: *SDL_Rect,
-                                     dst: *SDL_Surface, dst_rect: *SDL_Rect,
-                                     scale_mode: SDL_ScaleMode) -> bool                                 #foreign SDL3;
-SDL_BlitSurfaceUncheckedScaled   :: (src: *SDL_Surface, src_rect: *SDL_Rect,
-                                     dst: *SDL_Surface, dst_rect: *SDL_Rect,
-                                     scale_mode: SDL_ScaleMode) -> bool                                 #foreign SDL3;
-SDL_BlitSurfaceTiled             :: (src: *SDL_Surface, src_rect: *SDL_Rect,
-                                     dst: *SDL_Surface, dst_rect: *SDL_Rect) -> bool                    #foreign SDL3;
-SDL_BlitSurfaceTiledWithScale    :: (src: *SDL_Surface, src_rect: *SDL_Rect,
-                                     scale: float32, scale_mode: SDL_ScaleMode,
-                                     dst: *SDL_Surface, dst_rect: *SDL_Rect) -> bool                    #foreign SDL3;
-SDL_BlitSurface9Grid             :: (src: *SDL_Surface, src_rect: *SDL_Rect,
-                                     left_width: s32, right_width: s32,
-                                     top_height: s32, bottom_height: s32,
-                                     scale: float32, scale_mode: SDL_ScaleMode,
-                                     dst: *SDL_Surface, dst_rect: *SDL_Rect) -> bool                    #foreign SDL3;
-SDL_MapSurfaceRGB                :: (surface: *SDL_Surface, r: u8, g: u8, b: u8) -> u32                 #foreign SDL3;
-SDL_MapSurfaceRGBA               :: (surface: *SDL_Surface, r: u8, g: u8, b: u8, a: u8) -> u32          #foreign SDL3;
-SDL_ReadSurfacePixel             :: (surface: *SDL_Surface, x: s32, y: s32,
-                                     r: *u8, g: *u8, b: *u8, a: *u8) -> bool                            #foreign SDL3;
-SDL_ReadSurfacePixelFloat        :: (surface: *SDL_Surface, x: s32, y: s32,
-                                     r: *float32, g: *float32, b: *float32, a: *float32) -> bool        #foreign SDL3;
-SDL_WriteSurfacePixel            :: (surface: *SDL_Surface, x: s32, y: s32,
-                                     r: u8, g: u8, b: u8, a: u8) -> bool                                #foreign SDL3;
-SDL_WriteSurfacePixelFloat       :: (surface: *SDL_Surface, x: s32, y: s32,
-                                     r: float32, g: float32, b: float32, a: float32) -> bool            #foreign SDL3;
+PROP_SURFACE_SDR_WHITE_POINT_FLOAT              :: "SDL.surface.SDR_white_point";
+PROP_SURFACE_HDR_HEADROOM_FLOAT                 :: "SDL.surface.HDR_headroom";
+PROP_SURFACE_TONEMAP_OPERATOR_STRING            :: "SDL.surface.tonemap";

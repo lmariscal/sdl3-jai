@@ -1,1 +1,1 @@
-SDL_SensorID :: u32;
+Sensor_ID :: u32;

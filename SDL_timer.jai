@@ -1,31 +1,29 @@
-SDL_MS_PER_SECOND   :: 1000;
-SDL_US_PER_SECOND   :: 1000000;
-SDL_NS_PER_SECOND   :: 1000000000;
-SDL_NS_PER_MS       :: 1000000;
-SDL_NS_PER_US       :: 1000;
+MS_PER_SECOND   :: 1000;
+US_PER_SECOND   :: 1000000;
+NS_PER_SECOND   :: 1000000000;
+NS_PER_MS       :: 1000000;
+NS_PER_US       :: 1000;
 
-SDL_SECONDS_TO_NS :: (s: u64) -> u64    {return s * SDL_NS_PER_SECOND;}
-SDL_NS_TO_SECONDS :: (ns: u64) -> u64   {return ns / SDL_NS_PER_SECOND;}
-SDL_MS_TO_NS      :: (ms: u64) -> u64   {return ms * SDL_NS_PER_MS;}
-SDL_NS_TO_MS      :: (ns: u64) -> u64   {return ns / SDL_NS_PER_MS;}
-SDL_US_TO_NS      :: (us: u64) -> u64   {return us * SDL_NS_PER_US;}
-SDL_NS_TO_US      :: (ns: u64) -> u64   {return ns / SDL_NS_PER_US;}
+SECONDS_TO_NS :: (s: u64) -> u64    #expand {return s * NS_PER_SECOND;}
+NS_TO_SECONDS :: (ns: u64) -> u64   #expand {return ns / NS_PER_SECOND;}
+MS_TO_NS      :: (ms: u64) -> u64   #expand {return ms * NS_PER_MS;}
+NS_TO_MS      :: (ns: u64) -> u64   #expand {return ns / NS_PER_MS;}
+US_TO_NS      :: (us: u64) -> u64   #expand {return us * NS_PER_US;}
+NS_TO_US      :: (ns: u64) -> u64   #expand {return ns / NS_PER_US;}
 
 
-SDL_GetTicks                :: () -> u64                                                      #foreign SDL3;
-SDL_GetTicksNS              :: () -> u64                                                      #foreign SDL3;
-SDL_GetPerformanceCounter   :: () -> u64                                                      #foreign SDL3;
-SDL_GetPerformanceFrequency :: () -> u64                                                      #foreign SDL3;
-SDL_Delay                   :: (ms: u32)                                                      #foreign SDL3;
-SDL_DelayNS                 :: (ns: u64)                                                      #foreign SDL3;
-SDL_DelayPrecise            :: (ns: u64)                                                      #foreign SDL3;
+Timer_ID :: u32;
+Timer_Callback   :: #type (userdata: *void, timer_id: Timer_ID, interval: u32) -> u32;
+NS_Timer_Callback :: #type (userdata: *void, timer_id: Timer_ID, interval: u64) -> u64;
 
-SDL_TimerID :: u32;
-SDL_TimerCallback   :: #type (userdata: *void, timer_id: SDL_TimerID, interval: u32) -> u32;
-SDL_NSTimerCallback :: #type (userdata: *void, timer_id: SDL_TimerID, interval: u64) -> u64;
+get_ticks                 :: () -> u64                                                                 #foreign SDL3 "SDL_GetTicks";
+get_ticks_ns              :: () -> u64                                                                 #foreign SDL3 "SDL_GetTicksNS";
+get_performance_counter   :: () -> u64                                                                 #foreign SDL3 "SDL_GetPerformanceCounter";
+get_performance_frequency :: () -> u64                                                                 #foreign SDL3 "SDL_GetPerformanceFrequency";
+delay                     :: (ms: u32)                                                                 #foreign SDL3 "SDL_Delay";
+delay_ns                  :: (ns: u64)                                                                 #foreign SDL3 "SDL_DelayNS";
+delay_precise             :: (ns: u64)                                                                 #foreign SDL3 "SDL_DelayPrecise";
 
-SDL_AddTimer                :: (interval: u32, callback: SDL_TimerCallback,
-                                userdata: *void) -> SDL_TimerID                               #foreign SDL3;
-SDL_AddTimerNS              :: (interval: u64, callback: SDL_NSTimerCallback,
-                                userdata: *void) -> SDL_TimerID                               #foreign SDL3;
-SDL_RemoveTimer             :: (id: SDL_TimerID) -> bool                                      #foreign SDL3;
+add_timer                 :: (interval: u32, callback: Timer_Callback, userdata: *void) -> Timer_ID    #foreign SDL3 "SDL_AddTimer";
+add_timer_ns              :: (interval: u64, callback: NS_Timer_Callback, userdata: *void) -> Timer_ID #foreign SDL3 "SDL_AddTimerNS";
+remove_timer              :: (id: Timer_ID) -> bool                                                    #foreign SDL3 "SDL_RemoveTimer";

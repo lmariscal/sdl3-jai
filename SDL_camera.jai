@@ -1,1 +1,1 @@
-SDL_CameraID :: u32;
+Camera_ID :: u32;

@@ -1,3 +1,3 @@
-SDL_IOStream :: void;
+IO_Stream :: void;
 
-SDL_LoadFile :: (file: *u8, data_size: *u64) -> *void #foreign SDL3;
+load_file :: (file: *u8, data_size: *u64) -> *void #foreign SDL3 "SDL_LoadFile";

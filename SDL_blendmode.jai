@@ -1,1 +1,1 @@
-SDL_BlendMode :: u32;
+Blend_Mode :: u32;

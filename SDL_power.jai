@@ -1,11 +1,11 @@
-SDL_PowerState :: enum s32
+Power_State :: enum s32
 {
-    SDL_POWERSTATE_ERROR :: -1;
-    SDL_POWERSTATE_UNKNOWN;
-    SDL_POWERSTATE_ON_BATTERY;
-    SDL_POWERSTATE_NO_BATTERY;
-    SDL_POWERSTATE_CHARGING;
-    SDL_POWERSTATE_CHARGED;
+    POWERSTATE_ERROR :: -1;
+    POWERSTATE_UNKNOWN;
+    POWERSTATE_ON_BATTERY;
+    POWERSTATE_NO_BATTERY;
+    POWERSTATE_CHARGING;
+    POWERSTATE_CHARGED;
 }
 
-SDL_GetPowerInfo :: (seconds: *s32, percent: *s32) -> SDL_PowerState #foreign SDL3;
+get_power_info :: (seconds: *s32, percent: *s32) -> Power_State #foreign SDL3 "SDL_GetPowerInfo";

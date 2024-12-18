@@ -1,1 +1,1 @@
-SDL_JoystickID :: u32;
+Joystick_ID :: u32;

@@ -1,309 +1,209 @@
-SDL_SOFTWARE_RENDERER ::   "software";
+SOFTWARE_RENDERER ::   "software";
 
-SDL_Vertex :: struct
+Vertex :: struct
 {
-    position:  SDL_FPoint;
-    color:     SDL_FColor;
-    tex_coord: SDL_FPoint;
+    position:  F_Point;
+    color:     F_Color;
+    tex_coord: F_Point;
 }
 
-SDL_TextureAccess :: enum u32
+Texture_Access :: enum u32
 {
-    SDL_TEXTUREACCESS_STATIC;
-    SDL_TEXTUREACCESS_STREAMING;
-    SDL_TEXTUREACCESS_TARGET;
+    TEXTUREACCESS_STATIC;
+    TEXTUREACCESS_STREAMING;
+    TEXTUREACCESS_TARGET;
 }
 
-SDL_RendererLogicalPresentation :: enum u32
+Renderer_Logical_Presentation :: enum u32
 {
-    SDL_LOGICAL_PRESENTATION_DISABLED;
-    SDL_LOGICAL_PRESENTATION_STRETCH;
-    SDL_LOGICAL_PRESENTATION_LETTERBOX;
-    SDL_LOGICAL_PRESENTATION_OVERSCAN;
-    SDL_LOGICAL_PRESENTATION_INTEGER_SCALE;
+    LOGICAL_PRESENTATION_DISABLED;
+    LOGICAL_PRESENTATION_STRETCH;
+    LOGICAL_PRESENTATION_LETTERBOX;
+    LOGICAL_PRESENTATION_OVERSCAN;
+    LOGICAL_PRESENTATION_INTEGER_SCALE;
 }
 
-SDL_Renderer :: void;
-SDL_Texture  :: void;
+Renderer :: void;
+Texture  :: void;
 
-SDL_GetNumRenderDrivers          :: () -> s32                                               #foreign SDL3;
-SDL_GetRenderDriver              :: (index: s32) -> *u8                                     #foreign SDL3;
-SDL_CreateWindowAndRenderer      :: (title: *u8, width: s32, height: s32,
-                                     window_flags: SDL_WindowFlags, window: **SDL_Window,
-                                     renderer: **SDL_Renderer) -> bool                      #foreign SDL3;
+get_num_render_drivers               :: () -> s32                                                                                                                                                                                                               #foreign SDL3 "SDL_GetNumRenderDrivers";
+get_render_driver                    :: (index: s32) -> *u8                                                                                                                                                                                                     #foreign SDL3 "SDL_GetRenderDriver";
+create_window_and_renderer           :: (title: *u8, width: s32, height: s32, window_flags: Window_Flags, window: **Window, renderer: **Renderer) -> bool                                                                                                       #foreign SDL3 "SDL_CreateWindowAndRenderer";
+create_renderer                      :: (window: *Window, name: *u8) -> *Renderer                                                                                                                                                                               #foreign SDL3 "SDL_CreateRenderer";
+create_renderer_with_properties      :: (props: Properties_ID) -> *Renderer                                                                                                                                                                                     #foreign SDL3 "SDL_CreateRendererWithProperties";
+create_software_renderer             :: (surface: *Surface) -> *Renderer                                                                                                                                                                                        #foreign SDL3 "SDL_CreateSoftwareRenderer";
+get_renderer                         :: (window: *Window) -> *Renderer                                                                                                                                                                                          #foreign SDL3 "SDL_GetRenderer";
+get_render_window                    :: (renderer: *Renderer) -> *Window                                                                                                                                                                                        #foreign SDL3 "SDL_GetRenderWindow";
+get_renderer_name                    :: (renderer: *Renderer) -> *u8                                                                                                                                                                                            #foreign SDL3 "SDL_GetRendererName";
+get_renderer_properties              :: (renderer: *Renderer) -> Properties_ID                                                                                                                                                                                  #foreign SDL3 "SDL_GetRendererProperties";
+get_render_output_size               :: (renderer: *Renderer, w: *s32, h: *s32) -> bool                                                                                                                                                                         #foreign SDL3 "SDL_GetRenderOutputSize";
+get_current_render_output_size       :: (renderer: *Renderer, w: *s32, h: *s32) -> bool                                                                                                                                                                         #foreign SDL3 "SDL_GetCurrentRenderOutputSize";
+create_texture                       :: (renderer: *Renderer, format: Pixel_Format, access: Texture_Access, w: s32, h: s32) -> *Texture                                                                                                                          #foreign SDL3 "SDL_CreateTexture";
+create_texture_from_surface          :: (renderer: *Renderer, surface: *Surface) -> *Texture                                                                                                                                                                    #foreign SDL3 "SDL_CreateTextureFromSurface";
+create_texture_with_properties       :: (renderer: *Renderer, props: Properties_ID) -> *Texture                                                                                                                                                                 #foreign SDL3 "SDL_CreateTextureWithProperties";
+get_texture_properties               :: (texture: *Texture) -> Properties_ID                                                                                                                                                                                    #foreign SDL3 "SDL_GetTextureProperties";
+get_renderer_from_texture            :: (texture: *Texture) -> *Renderer                                                                                                                                                                                        #foreign SDL3 "SDL_GetRendererFromTexture";
+get_texture_size                     :: (texture: *Texture, w: *float32, h: *float32) -> bool                                                                                                                                                                   #foreign SDL3 "SDL_GetTextureSize";
+set_texture_color_mod                :: (texture: *Texture, r: u8, g: u8, b: u8) -> bool                                                                                                                                                                        #foreign SDL3 "SDL_SetTextureColorMod";
+set_texture_color_mod_float          :: (texture: *Texture, r: float32, g: float32, b: float32) -> bool                                                                                                                                                         #foreign SDL3 "SDL_SetTextureColorModFloat";
+get_texture_color_mod                :: (texture: *Texture, r: *u8, g: *u8, b: *u8) -> bool                                                                                                                                                                     #foreign SDL3 "SDL_GetTextureColorMod";
+get_texture_color_mod_float          :: (texture: *Texture, r: *float32, g: *float32, b: *float32) -> bool                                                                                                                                                      #foreign SDL3 "SDL_GetTextureColorModFloat";
+set_texture_alpha_mod                :: (texture: *Texture, alpha: u8) -> bool                                                                                                                                                                                  #foreign SDL3 "SDL_SetTextureAlphaMod";
+set_texture_alpha_mod_float          :: (texture: *Texture, alpha: float32) -> bool                                                                                                                                                                             #foreign SDL3 "SDL_SetTextureAlphaModFloat";
+get_texture_alpha_mod                :: (texture: *Texture, alpha: *u8) -> bool                                                                                                                                                                                 #foreign SDL3 "SDL_GetTextureAlphaMod";
+get_texture_alpha_mod_float          :: (texture: *Texture, alpha: *float32) -> bool                                                                                                                                                                            #foreign SDL3 "SDL_GetTextureAlphaModFloat";
+set_texture_blend_mode               :: (texture: *Texture, blend_mode: Blend_Mode) -> bool                                                                                                                                                                     #foreign SDL3 "SDL_SetTextureBlendMode";
+get_texture_blend_mode               :: (texture: *Texture, blend_mode: *Blend_Mode) -> bool                                                                                                                                                                    #foreign SDL3 "SDL_GetTextureBlendMode";
+set_texture_scale_mode               :: (texture: *Texture, scale_mode: Scale_Mode) -> bool                                                                                                                                                                     #foreign SDL3 "SDL_SetTextureScaleMode";
+get_texture_scale_mode               :: (texture: *Texture, scale_mode: *Scale_Mode) -> bool                                                                                                                                                                    #foreign SDL3 "SDL_GetTextureScaleMode";
+update_texture                       :: (texture: *Texture, rect: *Rect, pixels: *void, pitch: s32) -> bool                                                                                                                                                     #foreign SDL3 "SDL_UpdateTexture";
+update_yuv_texture                   :: (texture: *Texture, rect: *Rect, y_plane: *u8, y_pitch: s32, u_plane: *u8, u_pitch: s32, v_plane: *u8, v_pitch: s32) -> bool                                                                                            #foreign SDL3 "SDL_UpdateYUVTexture";
+update_nv_texture                    :: (texture: *Texture, rect: *Rect, y_plane: *u8, y_pitch: s32, uv_plane: *u8, uv_pitch: s32) -> bool                                                                                                                      #foreign SDL3 "SDL_UpdateNVTexture";
+lock_texture                         :: (texture: *Texture, rect: *Rect, pixels: **void, pitch: *s32) -> bool                                                                                                                                                   #foreign SDL3 "SDL_LockTexture";
+lock_texture_to_surface              :: (texture: *Texture, rect: *Rect, surface: **Surface) -> bool                                                                                                                                                            #foreign SDL3 "SDL_LockTextureToSurface";
+unlock_texture                       :: (texture: *Texture)                                                                                                                                                                                                     #foreign SDL3 "SDL_UnlockTexture";
+destroy_texture                      :: (texture: *Texture)                                                                                                                                                                                                     #foreign SDL3 "SDL_DestroyTexture";
+set_render_target                    :: (renderer: *Renderer, texture: *Texture) -> bool                                                                                                                                                                        #foreign SDL3 "SDL_SetRenderTarget";
+get_render_target                    :: (renderer: *Renderer) -> *Texture                                                                                                                                                                                       #foreign SDL3 "SDL_GetRenderTarget";
+set_render_logical_presentation      :: (renderer: *Renderer, w: s32, h: s32, mode: Renderer_Logical_Presentation) -> bool                                                                                                                                      #foreign SDL3 "SDL_SetRenderLogicalPresentation";
+get_render_logical_presentation      :: (renderer: *Renderer, w: *s32, h: *s32, mode: *Renderer_Logical_Presentation) -> bool                                                                                                                                   #foreign SDL3 "SDL_GetRenderLogicalPresentation";
+get_render_logical_presentation_rect :: (renderer: *Renderer, rect: *F_Rect) -> bool                                                                                                                                                                            #foreign SDL3 "SDL_GetRenderLogicalPresentationRect";
+render_coordinates_from_window       :: (renderer: *Renderer, window_x: float32, window_y: float32, x: *float32, y: *float32) -> bool                                                                                                                           #foreign SDL3 "SDL_RenderCoordinatesFromWindow";
+render_coordinates_to_window         :: (renderer: *Renderer, x: float32, y: float32, window_x: *float32, window_y: *float32) -> bool                                                                                                                           #foreign SDL3 "SDL_RenderCoordinatesToWindow";
+convert_event_to_render_coordinates  :: (renderer: *Renderer, event: *Event) -> bool                                                                                                                                                                            #foreign SDL3 "SDL_ConvertEventToRenderCoordinates";
+set_render_viewport                  :: (renderer: *Renderer, rect: *Rect) -> bool                                                                                                                                                                              #foreign SDL3 "SDL_SetRenderViewport";
+get_render_viewport                  :: (renderer: *Renderer, rect: *Rect) -> bool                                                                                                                                                                              #foreign SDL3 "SDL_GetRenderViewport";
+render_viewport_set                  :: (renderer: *Renderer) -> bool                                                                                                                                                                                           #foreign SDL3 "SDL_RenderViewportSet";
+get_render_safe_area                 :: (renderer: *Renderer, rect: *Rect) -> bool                                                                                                                                                                              #foreign SDL3 "SDL_GetRenderSafeArea";
+set_render_clip_rect                 :: (renderer: *Renderer, rect: *Rect) -> bool                                                                                                                                                                              #foreign SDL3 "SDL_SetRenderClipRect";
+get_render_clip_rect                 :: (renderer: *Renderer, rect: *Rect) -> bool                                                                                                                                                                              #foreign SDL3 "SDL_GetRenderClipRect";
+render_clip_enabled                  :: (renderer: *Renderer) -> bool                                                                                                                                                                                           #foreign SDL3 "SDL_RenderClipEnabled";
+set_render_scale                     :: (renderer: *Renderer, scale_x: float32, scale_y: float32) -> bool                                                                                                                                                       #foreign SDL3 "SDL_SetRenderScale";
+get_render_scale                     :: (renderer: *Renderer, scale_x: *float32, scale_y: *float32) -> bool                                                                                                                                                     #foreign SDL3 "SDL_GetRenderScale";
+set_render_draw_color                :: (renderer: *Renderer, r: u8, g: u8, b: u8, a: u8) -> bool                                                                                                                                                               #foreign SDL3 "SDL_SetRenderDrawColor";
+set_render_draw_color_float          :: (renderer: *Renderer, r: float32, g: float32, b: float32, a: float32) -> bool                                                                                                                                           #foreign SDL3 "SDL_SetRenderDrawColorFloat";
+get_render_draw_color                :: (renderer: *Renderer, r: *u8, g: *u8, b: *u8, a: *u8) -> bool                                                                                                                                                           #foreign SDL3 "SDL_GetRenderDrawColor";
+get_render_draw_color_float          :: (renderer: *Renderer, r: *float32, g: *float32, b: *float32, a: *float32) -> bool                                                                                                                                       #foreign SDL3 "SDL_GetRenderDrawColorFloat";
+set_render_color_scale               :: (renderer: *Renderer, scale: float32) -> bool                                                                                                                                                                           #foreign SDL3 "SDL_SetRenderColorScale";
+get_render_color_scale               :: (renderer: *Renderer, scale: *float32) -> bool                                                                                                                                                                          #foreign SDL3 "SDL_GetRenderColorScale";
+set_render_draw_blend_mode           :: (renderer: *Renderer, blend_mode: Blend_Mode) -> bool                                                                                                                                                                   #foreign SDL3 "SDL_SetRenderDrawBlendMode";
+get_render_draw_blend_mode           :: (renderer: *Renderer, blend_mode: *Blend_Mode) -> bool                                                                                                                                                                  #foreign SDL3 "SDL_GetRenderDrawBlendMode";
+render_clear                         :: (renderer: *Renderer) -> bool                                                                                                                                                                                           #foreign SDL3 "SDL_RenderClear";
+render_point                         :: (renderer: *Renderer, x: float32, y: float32) -> bool                                                                                                                                                                   #foreign SDL3 "SDL_RenderPoint";
+render_points                        :: (renderer: *Renderer, points: *F_Point, count: s32) -> bool                                                                                                                                                             #foreign SDL3 "SDL_RenderPoints";
+render_line                          :: (renderer: *Renderer, x1: float32, y1: float32, x2: float32, y2: float32) -> bool                                                                                                                                       #foreign SDL3 "SDL_RenderLine";
+render_lines                         :: (renderer: *Renderer, points: *F_Point, count: s32) -> bool                                                                                                                                                             #foreign SDL3 "SDL_RenderLines";
+render_rect                          :: (renderer: *Renderer, rect: *F_Rect) -> bool                                                                                                                                                                            #foreign SDL3 "SDL_RenderRect";
+render_rects                         :: (renderer: *Renderer, rects: *F_Rect, count: s32) -> bool                                                                                                                                                               #foreign SDL3 "SDL_RenderRects";
+render_fill_rect                     :: (renderer: *Renderer, rect: *F_Rect) -> bool                                                                                                                                                                            #foreign SDL3 "SDL_RenderFillRect";
+render_fill_rects                    :: (renderer: *Renderer, rects: *F_Rect, count: s32) -> bool                                                                                                                                                               #foreign SDL3 "SDL_RenderFillRects";
+render_texture                       :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, dst_rect: *F_Rect) -> bool                                                                                                                                  #foreign SDL3 "SDL_RenderTexture";
+render_texture_rotated               :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, dst_rect: *F_Rect, angle: float64, center: *F_Point, flip: Flip_Mode) -> bool                                                                                #foreign SDL3 "SDL_RenderTextureRotated";
+render_texture_tiled                 :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, scale: float32, dst_rect: *F_Rect) -> bool                                                                                                                  #foreign SDL3 "SDL_RenderTextureTiled";
+render_texture9_grid                 :: (renderer: *Renderer, texture: *Texture, src_rect: *F_Rect, left_width: float32, right_width: float32, top_height: float32, bottom_height: float32, scale: float32, dst_rect: *F_Rect) -> bool                          #foreign SDL3 "SDL_RenderTexture9Grid";
+render_geometry                      :: (renderer: *Renderer, texture: *Texture, vertices: *Vertex, num_vertices: s32, indices: s32, num_indices: s32) -> bool                                                                                                  #foreign SDL3 "SDL_RenderGeometry";
+render_geometry_raw                  :: (renderer: *Renderer, texture: *Texture, xy: *float32, xy_stride: s32, color: F_Color, color_stride: s32, uv: *float32, uv_stride: s32, num_vertices: s32, indices: *void, num_indices: s32, size_indices: s32) -> bool #foreign SDL3 "SDL_RenderGeometryRaw";
+render_read_pixels                   :: (renderer: *Renderer, rect: *Rect) -> *Surface                                                                                                                                                                          #foreign SDL3 "SDL_RenderReadPixels";
+render_present                       :: (renderer: *Renderer) -> bool                                                                                                                                                                                           #foreign SDL3 "SDL_RenderPresent";
+destroy_renderer                     :: (renderer: *Renderer)                                                                                                                                                                                                   #foreign SDL3 "SDL_DestroyRenderer";
+flush_renderer                       :: (renderer: *Renderer) -> bool                                                                                                                                                                                           #foreign SDL3 "SDL_FlushRenderer";
+get_render_metal_layer               :: (renderer: *Renderer) -> *void                                                                                                                                                                                          #foreign SDL3 "SDL_GetRenderMetalLayer";
+get_render_metal_command_encoder     :: (renderer: *Renderer) -> *void                                                                                                                                                                                          #foreign SDL3 "SDL_GetRenderMetalCommandEncoder";
+add_vulkan_render_semaphores         :: (renderer: *Renderer, wait_stage_mask: u32, wait_semaphore: s64, signal_semaphore: s64) -> bool                                                                                                                         #foreign SDL3 "SDL_AddVulkanRenderSemaphores";
 
-SDL_CreateRenderer               :: (window: *SDL_Window, name: *u8) -> *SDL_Renderer       #foreign SDL3;
-SDL_CreateRendererWithProperties :: (props: SDL_PropertiesID) -> *SDL_Renderer              #foreign SDL3;
+RENDERER_VSYNC_DISABLED ::  0;
+RENDERER_VSYNC_ADAPTIVE :: -1;
 
-SDL_PROP_RENDERER_CREATE_NAME_STRING                                :: "SDL.renderer.create.name";
-SDL_PROP_RENDERER_CREATE_WINDOW_POINTER                             :: "SDL.renderer.create.window";
-SDL_PROP_RENDERER_CREATE_SURFACE_POINTER                            :: "SDL.renderer.create.surface";
-SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER                   :: "SDL.renderer.create.output_colorspace";
-SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER                       :: "SDL.renderer.create.present_vsync";
-SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER                    :: "SDL.renderer.create.vulkan.instance";
-SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER                      :: "SDL.renderer.create.vulkan.surface";
-SDL_PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER             :: "SDL.renderer.create.vulkan.physical_device";
-SDL_PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER                      :: "SDL.renderer.create.vulkan.device";
-SDL_PROP_RENDERER_CREATE_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER  :: "SDL.renderer.create.vulkan.graphics_queue_family_index";
-SDL_PROP_RENDERER_CREATE_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER   :: "SDL.renderer.create.vulkan.present_queue_family_index";
+set_render_v_sync                    :: (renderer: *Renderer, vsync: s32) -> bool                                                                                                                                                                               #foreign SDL3 "SDL_SetRenderVSync";
+get_render_v_sync                    :: (renderer: *Renderer, vsync: *s32) -> bool                                                                                                                                                                              #foreign SDL3 "SDL_GetRenderVSync";
+render_debug_text                    :: (renderer: *Renderer, x: float32, y: float32, str: *u8) -> bool                                                                                                                                                         #foreign SDL3 "SDL_RenderDebugText";
 
-
-SDL_CreateSoftwareRenderer       :: (surface: *SDL_Surface) -> *SDL_Renderer                #foreign SDL3;
-SDL_GetRenderer                  :: (window: *SDL_Window) -> *SDL_Renderer                  #foreign SDL3;
-SDL_GetRenderWindow              :: (renderer: *SDL_Renderer) -> *SDL_Window                #foreign SDL3;
-SDL_GetRendererName              :: (renderer: *SDL_Renderer) -> *u8                        #foreign SDL3;
-SDL_GetRendererProperties        :: (renderer: *SDL_Renderer) -> SDL_PropertiesID           #foreign SDL3;
-
-SDL_PROP_RENDERER_NAME_STRING                               :: "SDL.renderer.name";
-SDL_PROP_RENDERER_WINDOW_POINTER                            :: "SDL.renderer.window";
-SDL_PROP_RENDERER_SURFACE_POINTER                           :: "SDL.renderer.surface";
-SDL_PROP_RENDERER_VSYNC_NUMBER                              :: "SDL.renderer.vsync";
-SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER                   :: "SDL.renderer.max_texture_size";
-SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER                   :: "SDL.renderer.texture_formats";
-SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER                  :: "SDL.renderer.output_colorspace";
-SDL_PROP_RENDERER_HDR_ENABLED_BOOLEAN                       :: "SDL.renderer.HDR_enabled";
-SDL_PROP_RENDERER_SDR_WHITE_POINT_FLOAT                     :: "SDL.renderer.SDR_white_point";
-SDL_PROP_RENDERER_HDR_HEADROOM_FLOAT                        :: "SDL.renderer.HDR_headroom";
-SDL_PROP_RENDERER_D3D9_DEVICE_POINTER                       :: "SDL.renderer.d3d9.device";
-SDL_PROP_RENDERER_D3D11_DEVICE_POINTER                      :: "SDL.renderer.d3d11.device";
-SDL_PROP_RENDERER_D3D11_SWAPCHAIN_POINTER                   :: "SDL.renderer.d3d11.swap_chain";
-SDL_PROP_RENDERER_D3D12_DEVICE_POINTER                      :: "SDL.renderer.d3d12.device";
-SDL_PROP_RENDERER_D3D12_SWAPCHAIN_POINTER                   :: "SDL.renderer.d3d12.swap_chain";
-SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER               :: "SDL.renderer.d3d12.command_queue";
-SDL_PROP_RENDERER_VULKAN_INSTANCE_POINTER                   :: "SDL.renderer.vulkan.instance";
-SDL_PROP_RENDERER_VULKAN_SURFACE_NUMBER                     :: "SDL.renderer.vulkan.surface";
-SDL_PROP_RENDERER_VULKAN_PHYSICAL_DEVICE_POINTER            :: "SDL.renderer.vulkan.physical_device";
-SDL_PROP_RENDERER_VULKAN_DEVICE_POINTER                     :: "SDL.renderer.vulkan.device";
-SDL_PROP_RENDERER_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER :: "SDL.renderer.vulkan.graphics_queue_family_index";
-SDL_PROP_RENDERER_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER  :: "SDL.renderer.vulkan.present_queue_family_index";
-SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER       :: "SDL.renderer.vulkan.swapchain_image_count";
-
-
-SDL_GetRenderOutputSize          :: (renderer: *SDL_Renderer, w: *s32, h: *s32) -> bool     #foreign SDL3;
-SDL_GetCurrentRenderOutputSize   :: (renderer: *SDL_Renderer, w: *s32, h: *s32) -> bool     #foreign SDL3;
-SDL_CreateTexture                :: (renderer: *SDL_Renderer,
-                                     format: SDL_PixelFormat, access: SDL_TextureAccess,
-                                     w: s32, h: s32) -> *SDL_Texture                        #foreign SDL3;
-
-SDL_CreateTextureFromSurface     :: (renderer: *SDL_Renderer,
-                                     surface: *SDL_Surface) -> *SDL_Texture                 #foreign SDL3;
-
-SDL_CreateTextureWithProperties  :: (renderer: *SDL_Renderer, props: SDL_PropertiesID) -> *SDL_Texture #foreign SDL3;
-
-SDL_GetTextureProperties         :: (texture: *SDL_Texture) -> SDL_PropertiesID             #foreign SDL3;
-
-
-SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER           :: "SDL.texture.create.colorspace";
-SDL_PROP_TEXTURE_CREATE_FORMAT_NUMBER               :: "SDL.texture.create.format";
-SDL_PROP_TEXTURE_CREATE_ACCESS_NUMBER               :: "SDL.texture.create.access";
-SDL_PROP_TEXTURE_CREATE_WIDTH_NUMBER                :: "SDL.texture.create.width";
-SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER               :: "SDL.texture.create.height";
-SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT       :: "SDL.texture.create.SDR_white_point";
-SDL_PROP_TEXTURE_CREATE_HDR_HEADROOM_FLOAT          :: "SDL.texture.create.HDR_headroom";
-SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_POINTER       :: "SDL.texture.create.d3d11.texture";
-SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_U_POINTER     :: "SDL.texture.create.d3d11.texture_u";
-SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_V_POINTER     :: "SDL.texture.create.d3d11.texture_v";
-SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_POINTER       :: "SDL.texture.create.d3d12.texture";
-SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_U_POINTER     :: "SDL.texture.create.d3d12.texture_u";
-SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_V_POINTER     :: "SDL.texture.create.d3d12.texture_v";
-SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER   :: "SDL.texture.create.metal.pixelbuffer";
-SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER       :: "SDL.texture.create.opengl.texture";
-SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_UV_NUMBER    :: "SDL.texture.create.opengl.texture_uv";
-SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_U_NUMBER     :: "SDL.texture.create.opengl.texture_u";
-SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_V_NUMBER     :: "SDL.texture.create.opengl.texture_v";
-SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_NUMBER    :: "SDL.texture.create.opengles2.texture";
-SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_UV_NUMBER :: "SDL.texture.create.opengles2.texture_uv";
-SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_U_NUMBER  :: "SDL.texture.create.opengles2.texture_u";
-SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER  :: "SDL.texture.create.opengles2.texture_v";
-SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER       :: "SDL.texture.create.vulkan.texture";
-
-SDL_PROP_TEXTURE_COLORSPACE_NUMBER                  :: "SDL.texture.colorspace";
-SDL_PROP_TEXTURE_FORMAT_NUMBER                      :: "SDL.texture.format";
-SDL_PROP_TEXTURE_ACCESS_NUMBER                      :: "SDL.texture.access";
-SDL_PROP_TEXTURE_WIDTH_NUMBER                       :: "SDL.texture.width";
-SDL_PROP_TEXTURE_HEIGHT_NUMBER                      :: "SDL.texture.height";
-SDL_PROP_TEXTURE_SDR_WHITE_POINT_FLOAT              :: "SDL.texture.SDR_white_point";
-SDL_PROP_TEXTURE_HDR_HEADROOM_FLOAT                 :: "SDL.texture.HDR_headroom";
-SDL_PROP_TEXTURE_D3D11_TEXTURE_POINTER              :: "SDL.texture.d3d11.texture";
-SDL_PROP_TEXTURE_D3D11_TEXTURE_U_POINTER            :: "SDL.texture.d3d11.texture_u";
-SDL_PROP_TEXTURE_D3D11_TEXTURE_V_POINTER            :: "SDL.texture.d3d11.texture_v";
-SDL_PROP_TEXTURE_D3D12_TEXTURE_POINTER              :: "SDL.texture.d3d12.texture";
-SDL_PROP_TEXTURE_D3D12_TEXTURE_U_POINTER            :: "SDL.texture.d3d12.texture_u";
-SDL_PROP_TEXTURE_D3D12_TEXTURE_V_POINTER            :: "SDL.texture.d3d12.texture_v";
-SDL_PROP_TEXTURE_OPENGL_TEXTURE_NUMBER              :: "SDL.texture.opengl.texture";
-SDL_PROP_TEXTURE_OPENGL_TEXTURE_UV_NUMBER           :: "SDL.texture.opengl.texture_uv";
-SDL_PROP_TEXTURE_OPENGL_TEXTURE_U_NUMBER            :: "SDL.texture.opengl.texture_u";
-SDL_PROP_TEXTURE_OPENGL_TEXTURE_V_NUMBER            :: "SDL.texture.opengl.texture_v";
-SDL_PROP_TEXTURE_OPENGL_TEXTURE_TARGET_NUMBER       :: "SDL.texture.opengl.target";
-SDL_PROP_TEXTURE_OPENGL_TEX_W_FLOAT                 :: "SDL.texture.opengl.tex_w";
-SDL_PROP_TEXTURE_OPENGL_TEX_H_FLOAT                 :: "SDL.texture.opengl.tex_h";
-SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_NUMBER           :: "SDL.texture.opengles2.texture";
-SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_UV_NUMBER        :: "SDL.texture.opengles2.texture_uv";
-SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_U_NUMBER         :: "SDL.texture.opengles2.texture_u";
-SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER         :: "SDL.texture.opengles2.texture_v";
-SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER    :: "SDL.texture.opengles2.target";
-SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER              :: "SDL.texture.vulkan.texture";
+DEBUG_TEXT_FONT_CHARACTER_SIZE :: 8;
 
 
-SDL_GetRendererFromTexture       :: (texture: *SDL_Texture) -> *SDL_Renderer                    #foreign SDL3;
-SDL_GetTextureSize               :: (texture: *SDL_Texture, w: *float32, h: *float32) -> bool   #foreign SDL3;
-SDL_SetTextureColorMod           :: (texture: *SDL_Texture, r: u8, g: u8, b: u8) -> bool        #foreign SDL3;
-SDL_SetTextureColorModFloat      :: (texture: *SDL_Texture,
-                                     r: float32, g: float32, b: float32) -> bool                #foreign SDL3;
+PROP_RENDERER_CREATE_NAME_STRING                                :: "SDL.renderer.create.name";
+PROP_RENDERER_CREATE_WINDOW_POINTER                             :: "SDL.renderer.create.window";
+PROP_RENDERER_CREATE_SURFACE_POINTER                            :: "SDL.renderer.create.surface";
+PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER                   :: "SDL.renderer.create.output_colorspace";
+PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER                       :: "SDL.renderer.create.present_vsync";
+PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER                    :: "SDL.renderer.create.vulkan.instance";
+PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER                      :: "SDL.renderer.create.vulkan.surface";
+PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER             :: "SDL.renderer.create.vulkan.physical_device";
+PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER                      :: "SDL.renderer.create.vulkan.device";
+PROP_RENDERER_CREATE_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER  :: "SDL.renderer.create.vulkan.graphics_queue_family_index";
+PROP_RENDERER_CREATE_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER   :: "SDL.renderer.create.vulkan.present_queue_family_index";
 
-SDL_GetTextureColorMod           :: (texture: *SDL_Texture, r: *u8, g: *u8, b: *u8) -> bool     #foreign SDL3;
-SDL_GetTextureColorModFloat      :: (texture: *SDL_Texture,
-                                     r: *float32, g: *float32, b: *float32) -> bool             #foreign SDL3;
+PROP_RENDERER_NAME_STRING                               :: "SDL.renderer.name";
+PROP_RENDERER_WINDOW_POINTER                            :: "SDL.renderer.window";
+PROP_RENDERER_SURFACE_POINTER                           :: "SDL.renderer.surface";
+PROP_RENDERER_VSYNC_NUMBER                              :: "SDL.renderer.vsync";
+PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER                   :: "SDL.renderer.max_texture_size";
+PROP_RENDERER_TEXTURE_FORMATS_POINTER                   :: "SDL.renderer.texture_formats";
+PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER                  :: "SDL.renderer.output_colorspace";
+PROP_RENDERER_HDR_ENABLED_BOOLEAN                       :: "SDL.renderer.HDR_enabled";
+PROP_RENDERER_SDR_WHITE_POINT_FLOAT                     :: "SDL.renderer.SDR_white_point";
+PROP_RENDERER_HDR_HEADROOM_FLOAT                        :: "SDL.renderer.HDR_headroom";
+PROP_RENDERER_D3D9_DEVICE_POINTER                       :: "SDL.renderer.d3d9.device";
+PROP_RENDERER_D3D11_DEVICE_POINTER                      :: "SDL.renderer.d3d11.device";
+PROP_RENDERER_D3D11_SWAPCHAIN_POINTER                   :: "SDL.renderer.d3d11.swap_chain";
+PROP_RENDERER_D3D12_DEVICE_POINTER                      :: "SDL.renderer.d3d12.device";
+PROP_RENDERER_D3D12_SWAPCHAIN_POINTER                   :: "SDL.renderer.d3d12.swap_chain";
+PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER               :: "SDL.renderer.d3d12.command_queue";
+PROP_RENDERER_VULKAN_INSTANCE_POINTER                   :: "SDL.renderer.vulkan.instance";
+PROP_RENDERER_VULKAN_SURFACE_NUMBER                     :: "SDL.renderer.vulkan.surface";
+PROP_RENDERER_VULKAN_PHYSICAL_DEVICE_POINTER            :: "SDL.renderer.vulkan.physical_device";
+PROP_RENDERER_VULKAN_DEVICE_POINTER                     :: "SDL.renderer.vulkan.device";
+PROP_RENDERER_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER :: "SDL.renderer.vulkan.graphics_queue_family_index";
+PROP_RENDERER_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER  :: "SDL.renderer.vulkan.present_queue_family_index";
+PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER       :: "SDL.renderer.vulkan.swapchain_image_count";
 
-SDL_SetTextureAlphaMod           :: (texture: *SDL_Texture, alpha: u8) -> bool                  #foreign SDL3;
-SDL_SetTextureAlphaModFloat      :: (texture: *SDL_Texture, alpha: float32) -> bool             #foreign SDL3;
-SDL_GetTextureAlphaMod           :: (texture: *SDL_Texture, alpha: *u8) -> bool                 #foreign SDL3;
-SDL_GetTextureAlphaModFloat      :: (texture: *SDL_Texture, alpha: *float32) -> bool            #foreign SDL3;
-SDL_SetTextureBlendMode          :: (texture: *SDL_Texture, blend_mode: SDL_BlendMode) -> bool  #foreign SDL3;
-SDL_GetTextureBlendMode          :: (texture: *SDL_Texture, blend_mode: *SDL_BlendMode) -> bool #foreign SDL3;
-SDL_SetTextureScaleMode          :: (texture: *SDL_Texture, scale_mode: SDL_ScaleMode) -> bool  #foreign SDL3;
-SDL_GetTextureScaleMode          :: (texture: *SDL_Texture, scale_mode: *SDL_ScaleMode) -> bool #foreign SDL3;
-SDL_UpdateTexture                :: (texture: *SDL_Texture, rect: *SDL_Rect,
-                                     pixels: *void, pitch: s32) -> bool                         #foreign SDL3;
+PROP_TEXTURE_CREATE_COLORSPACE_NUMBER           :: "SDL.texture.create.colorspace";
+PROP_TEXTURE_CREATE_FORMAT_NUMBER               :: "SDL.texture.create.format";
+PROP_TEXTURE_CREATE_ACCESS_NUMBER               :: "SDL.texture.create.access";
+PROP_TEXTURE_CREATE_WIDTH_NUMBER                :: "SDL.texture.create.width";
+PROP_TEXTURE_CREATE_HEIGHT_NUMBER               :: "SDL.texture.create.height";
+PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT       :: "SDL.texture.create.SDR_white_point";
+PROP_TEXTURE_CREATE_HDR_HEADROOM_FLOAT          :: "SDL.texture.create.HDR_headroom";
+PROP_TEXTURE_CREATE_D3D11_TEXTURE_POINTER       :: "SDL.texture.create.d3d11.texture";
+PROP_TEXTURE_CREATE_D3D11_TEXTURE_U_POINTER     :: "SDL.texture.create.d3d11.texture_u";
+PROP_TEXTURE_CREATE_D3D11_TEXTURE_V_POINTER     :: "SDL.texture.create.d3d11.texture_v";
+PROP_TEXTURE_CREATE_D3D12_TEXTURE_POINTER       :: "SDL.texture.create.d3d12.texture";
+PROP_TEXTURE_CREATE_D3D12_TEXTURE_U_POINTER     :: "SDL.texture.create.d3d12.texture_u";
+PROP_TEXTURE_CREATE_D3D12_TEXTURE_V_POINTER     :: "SDL.texture.create.d3d12.texture_v";
+PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER   :: "SDL.texture.create.metal.pixelbuffer";
+PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER       :: "SDL.texture.create.opengl.texture";
+PROP_TEXTURE_CREATE_OPENGL_TEXTURE_UV_NUMBER    :: "SDL.texture.create.opengl.texture_uv";
+PROP_TEXTURE_CREATE_OPENGL_TEXTURE_U_NUMBER     :: "SDL.texture.create.opengl.texture_u";
+PROP_TEXTURE_CREATE_OPENGL_TEXTURE_V_NUMBER     :: "SDL.texture.create.opengl.texture_v";
+PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_NUMBER    :: "SDL.texture.create.opengles2.texture";
+PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_UV_NUMBER :: "SDL.texture.create.opengles2.texture_uv";
+PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_U_NUMBER  :: "SDL.texture.create.opengles2.texture_u";
+PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER  :: "SDL.texture.create.opengles2.texture_v";
+PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER       :: "SDL.texture.create.vulkan.texture";
 
-SDL_UpdateYUVTexture             :: (texture: *SDL_Texture, rect: *SDL_Rect,
-                                     y_plane: *u8, y_pitch: s32,
-                                     u_plane: *u8, u_pitch: s32,
-                                     v_plane: *u8, v_pitch: s32) -> bool                        #foreign SDL3;
-
-SDL_UpdateNVTexture              :: (texture: *SDL_Texture, rect: *SDL_Rect,
-                                     y_plane: *u8, y_pitch: s32,
-                                     uv_plane: *u8, uv_pitch: s32) -> bool                      #foreign SDL3;
-
-SDL_LockTexture                  :: (texture: *SDL_Texture, rect: *SDL_Rect,
-                                     pixels: **void, pitch: *s32) -> bool                       #foreign SDL3;
-
-SDL_LockTextureToSurface         :: (texture: *SDL_Texture,
-                                     rect: *SDL_Rect,
-                                     surface: **SDL_Surface) -> bool                            #foreign SDL3;
-
-SDL_UnlockTexture                :: (texture: *SDL_Texture)                                     #foreign SDL3;
-SDL_SetRenderTarget              :: (renderer: *SDL_Renderer, texture: *SDL_Texture) -> bool    #foreign SDL3;
-SDL_GetRenderTarget              :: (renderer: *SDL_Renderer) -> *SDL_Texture                   #foreign SDL3;
-SDL_SetRenderLogicalPresentation :: (renderer: *SDL_Renderer,
-                                     w: s32, h: s32,
-                                     mode: SDL_RendererLogicalPresentation) -> bool             #foreign SDL3;
-
-
-SDL_GetRenderLogicalPresentation :: (renderer: *SDL_Renderer,
-                                     w: *s32, h: *s32,
-                                     mode: *SDL_RendererLogicalPresentation) -> bool            #foreign SDL3;
-
-SDL_GetRenderLogicalPresentationRect :: (renderer: *SDL_Renderer, rect: *SDL_FRect) -> bool     #foreign SDL3;
-SDL_RenderCoordinatesFromWindow  :: (renderer: *SDL_Renderer,
-                                     window_x: float32, window_y: float32,
-                                     x: *float32, y: *float32) -> bool                          #foreign SDL3;
-
-SDL_RenderCoordinatesToWindow    :: (renderer: *SDL_Renderer,
-                                     x: float32, y: float32,
-                                     window_x: *float32, window_y: *float32) -> bool            #foreign SDL3;
-
-SDL_ConvertEventToRenderCoordinates :: (renderer: *SDL_Renderer, event: *SDL_Event) -> bool     #foreign SDL3;
-SDL_SetRenderViewport            :: (renderer: *SDL_Renderer, rect: *SDL_Rect) -> bool          #foreign SDL3;
-SDL_GetRenderViewport            :: (renderer: *SDL_Renderer, rect: *SDL_Rect) -> bool          #foreign SDL3;
-SDL_RenderViewportSet            :: (renderer: *SDL_Renderer) -> bool                           #foreign SDL3;
-SDL_GetRenderSafeArea            :: (renderer: *SDL_Renderer, rect: *SDL_Rect) -> bool          #foreign SDL3;
-SDL_SetRenderClipRect            :: (renderer: *SDL_Renderer, rect: *SDL_Rect) -> bool          #foreign SDL3;
-SDL_GetRenderClipRect            :: (renderer: *SDL_Renderer, rect: *SDL_Rect) -> bool          #foreign SDL3;
-SDL_RenderClipEnabled            :: (renderer: *SDL_Renderer) -> bool                           #foreign SDL3;
-SDL_SetRenderScale               :: (renderer: *SDL_Renderer,
-                                     scale_x: float32, scale_y: float32) -> bool                #foreign SDL3;
-
-SDL_GetRenderScale               :: (renderer: *SDL_Renderer,
-                                     scale_x: *float32, scale_y: *float32) -> bool              #foreign SDL3;
-
-SDL_SetRenderDrawColor           :: (renderer: *SDL_Renderer,
-                                     r: u8, g: u8, b: u8, a: u8) -> bool                        #foreign SDL3;
-
-SDL_SetRenderDrawColorFloat      :: (renderer: *SDL_Renderer,
-                                     r: float32, g: float32, b: float32, a: float32) -> bool    #foreign SDL3;
-
-SDL_GetRenderDrawColor           :: (renderer: *SDL_Renderer,
-                                     r: *u8, g: *u8, b: *u8, a: *u8) -> bool                    #foreign SDL3;
-
-SDL_GetRenderDrawColorFloat      :: (renderer: *SDL_Renderer,
-                                    r: *float32, g: *float32, b: *float32, a: *float32) -> bool #foreign SDL3;
-
-SDL_SetRenderColorScale          :: (renderer: *SDL_Renderer, scale: float32) -> bool           #foreign SDL3;
-SDL_GetRenderColorScale          :: (renderer: *SDL_Renderer, scale: *float32) -> bool          #foreign SDL3;
-SDL_SetRenderDrawBlendMode       :: (renderer: *SDL_Renderer,
-                                     blend_mode: SDL_BlendMode) -> bool                         #foreign SDL3;
-
-SDL_GetRenderDrawBlendMode       :: (renderer: *SDL_Renderer,
-                                     blend_mode: *SDL_BlendMode) -> bool                        #foreign SDL3;
-
-SDL_RenderClear                  :: (renderer: *SDL_Renderer) -> bool                           #foreign SDL3;
-SDL_RenderPoint                  :: (renderer: *SDL_Renderer, x: float32, y: float32) -> bool   #foreign SDL3;
-SDL_RenderPoints                 :: (renderer: *SDL_Renderer,
-                                     points: *SDL_FPoint, count: s32) -> bool                   #foreign SDL3;
-
-SDL_RenderLine                   :: (renderer: *SDL_Renderer,
-                                     x1: float32, y1: float32,
-                                     x2: float32, y2: float32) -> bool                          #foreign SDL3;
-
-SDL_RenderLines                  :: (renderer: *SDL_Renderer,
-                                     points: *SDL_FPoint, count: s32) -> bool                   #foreign SDL3;
-
-SDL_RenderRect                   :: (renderer: *SDL_Renderer, rect: *SDL_FRect) -> bool         #foreign SDL3;
-SDL_RenderRects                  :: (renderer: *SDL_Renderer,
-                                     rects: *SDL_FRect, count: s32) -> bool                     #foreign SDL3;
-
-SDL_RenderFillRect               :: (renderer: *SDL_Renderer, rect: *SDL_FRect) -> bool         #foreign SDL3;
-SDL_RenderFillRects              :: (renderer: *SDL_Renderer,
-                                     rects: *SDL_FRect, count: s32) -> bool                     #foreign SDL3;
-
-SDL_RenderTexture                :: (renderer: *SDL_Renderer, texture: *SDL_Texture,
-                                     src_rect: *SDL_FRect, dst_rect: *SDL_FRect) -> bool        #foreign SDL3;
-
-SDL_RenderTextureRotated         :: (renderer: *SDL_Renderer, texture: *SDL_Texture,
-                                     src_rect: *SDL_FRect, dst_rect: *SDL_FRect,
-                                     angle: float64, center: *SDL_FPoint,
-                                     flip: SDL_FlipMode) -> bool                                #foreign SDL3;
-
-SDL_RenderTextureTiled           :: (renderer: *SDL_Renderer, texture: *SDL_Texture,
-                                     src_rect: *SDL_FRect, scale: float32,
-                                     dst_rect: *SDL_FRect) -> bool                              #foreign SDL3;
-
-SDL_RenderTexture9Grid           :: (renderer: *SDL_Renderer, texture: *SDL_Texture,
-                                     src_rect: *SDL_FRect,
-                                     left_width: float32, right_width: float32,
-                                     top_height: float32, bottom_height: float32,
-                                     scale: float32, dst_rect: *SDL_FRect) -> bool              #foreign SDL3;
-
-SDL_RenderGeometry               :: (renderer: *SDL_Renderer, texture: *SDL_Texture,
-                                     vertices: *SDL_Vertex, num_vertices: s32,
-                                     indices: s32, num_indices: s32) -> bool                    #foreign SDL3;
-
-SDL_RenderGeometryRaw            :: (renderer: *SDL_Renderer, texture: *SDL_Texture,
-                                     xy: *float32, xy_stride: s32,
-                                     color: SDL_FColor, color_stride: s32,
-                                     uv: *float32, uv_stride: s32, num_vertices: s32,
-                                     indices: *void, num_indices: s32,
-                                     size_indices: s32) -> bool                                 #foreign SDL3;
-
-SDL_RenderReadPixels             :: (renderer: *SDL_Renderer, rect: *SDL_Rect) -> *SDL_Surface  #foreign SDL3;
-SDL_RenderPresent                :: (renderer: *SDL_Renderer) -> bool                           #foreign SDL3;
-SDL_DestroyTexture               :: (texture: *SDL_Texture)                                     #foreign SDL3;
-SDL_DestroyRenderer              :: (renderer: *SDL_Renderer)                                   #foreign SDL3;
-SDL_FlushRenderer                :: (renderer: *SDL_Renderer) -> bool                           #foreign SDL3;
-SDL_GetRenderMetalLayer          :: (renderer: *SDL_Renderer) -> *void                          #foreign SDL3;
-SDL_GetRenderMetalCommandEncoder :: (renderer: *SDL_Renderer) -> *void                          #foreign SDL3;
-SDL_AddVulkanRenderSemaphores    :: (renderer: *SDL_Renderer,
-                                     wait_stage_mask: u32, wait_semaphore: s64,
-                                     signal_semaphore: s64) -> bool                             #foreign SDL3;
-
-SDL_RENDERER_VSYNC_DISABLED :: 0;
-SDL_RENDERER_VSYNC_ADAPTIVE :: -1;
-
-SDL_SetRenderVSync               :: (renderer: *SDL_Renderer, vsync: s32) -> bool               #foreign SDL3;
-SDL_GetRenderVSync               :: (renderer: *SDL_Renderer, vsync: *s32) -> bool              #foreign SDL3;
-
-SDL_RenderDebugText              :: (renderer: *SDL_Renderer,
-                                     x: float32, y: float32, str: *u8) -> bool                  #foreign SDL3;
-
-SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE :: 8;
+PROP_TEXTURE_COLORSPACE_NUMBER                  :: "SDL.texture.colorspace";
+PROP_TEXTURE_FORMAT_NUMBER                      :: "SDL.texture.format";
+PROP_TEXTURE_ACCESS_NUMBER                      :: "SDL.texture.access";
+PROP_TEXTURE_WIDTH_NUMBER                       :: "SDL.texture.width";
+PROP_TEXTURE_HEIGHT_NUMBER                      :: "SDL.texture.height";
+PROP_TEXTURE_SDR_WHITE_POINT_FLOAT              :: "SDL.texture.SDR_white_point";
+PROP_TEXTURE_HDR_HEADROOM_FLOAT                 :: "SDL.texture.HDR_headroom";
+PROP_TEXTURE_D3D11_TEXTURE_POINTER              :: "SDL.texture.d3d11.texture";
+PROP_TEXTURE_D3D11_TEXTURE_U_POINTER            :: "SDL.texture.d3d11.texture_u";
+PROP_TEXTURE_D3D11_TEXTURE_V_POINTER            :: "SDL.texture.d3d11.texture_v";
+PROP_TEXTURE_D3D12_TEXTURE_POINTER              :: "SDL.texture.d3d12.texture";
+PROP_TEXTURE_D3D12_TEXTURE_U_POINTER            :: "SDL.texture.d3d12.texture_u";
+PROP_TEXTURE_D3D12_TEXTURE_V_POINTER            :: "SDL.texture.d3d12.texture_v";
+PROP_TEXTURE_OPENGL_TEXTURE_NUMBER              :: "SDL.texture.opengl.texture";
+PROP_TEXTURE_OPENGL_TEXTURE_UV_NUMBER           :: "SDL.texture.opengl.texture_uv";
+PROP_TEXTURE_OPENGL_TEXTURE_U_NUMBER            :: "SDL.texture.opengl.texture_u";
+PROP_TEXTURE_OPENGL_TEXTURE_V_NUMBER            :: "SDL.texture.opengl.texture_v";
+PROP_TEXTURE_OPENGL_TEXTURE_TARGET_NUMBER       :: "SDL.texture.opengl.target";
+PROP_TEXTURE_OPENGL_TEX_W_FLOAT                 :: "SDL.texture.opengl.tex_w";
+PROP_TEXTURE_OPENGL_TEX_H_FLOAT                 :: "SDL.texture.opengl.tex_h";
+PROP_TEXTURE_OPENGLES2_TEXTURE_NUMBER           :: "SDL.texture.opengles2.texture";
+PROP_TEXTURE_OPENGLES2_TEXTURE_UV_NUMBER        :: "SDL.texture.opengles2.texture_uv";
+PROP_TEXTURE_OPENGLES2_TEXTURE_U_NUMBER         :: "SDL.texture.opengles2.texture_u";
+PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER         :: "SDL.texture.opengles2.texture_v";
+PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER    :: "SDL.texture.opengles2.target";
+PROP_TEXTURE_VULKAN_TEXTURE_NUMBER              :: "SDL.texture.vulkan.texture";
