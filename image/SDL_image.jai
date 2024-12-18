@@ -78,5 +78,5 @@ free_animation                :: (anim: *Animation)                             
 load_gif_animation_io         :: (src: *IO_Stream) -> *Animation                                               #foreign SDL3_image "IMG_LoadGIFAnimation_IO";
 load_webp_animation_io        :: (src: *IO_Stream) -> *Animation                                               #foreign SDL3_image "IMG_LoadWEBPAnimation_IO";
 
-#scope_file
-#import,file "../module.jai";
+#scope_module;
+#import "SDL3";
