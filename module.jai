@@ -27,7 +27,6 @@
 #load "SDL_iostream.jai";
 #load "SDL_gpu.jai";
 #load "SDL_filesystem.jai";
-// #load "SDL_image.jai";
 
 #scope_export
 
