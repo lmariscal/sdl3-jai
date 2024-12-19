@@ -41,6 +41,7 @@ cmake --build . --config Release
 #+end_src
 
 * Finished
+- SDL_gamepad.jai
 - SDL_pixels.jai
 - SDL_image.jai
 - SDL_gpu.jai
@@ -59,6 +60,7 @@ cmake --build . --config Release
 - SDL_mouse.jai
 - SDL_keycode.jai
 - SDL_platform.jai
+- SDL_guid.jai
 
 * Unfinished
 - SDL_camera.jai

@@ -27,6 +27,8 @@
 #load "SDL_iostream.jai";
 #load "SDL_gpu.jai";
 #load "SDL_filesystem.jai";
+#load "SDL_gamepad.jai";
+#load "SDL_guid.jai";
 
 #scope_export
 
@@ -40,7 +42,7 @@
     #library,system,link_always "libpthread";
 }
 
-// main :: () {}
+main :: () {}
 
 // Local Variables:
 // compile-command: "jai module.jai"
