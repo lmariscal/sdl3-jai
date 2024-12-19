@@ -40,7 +40,7 @@
     #library,system,link_always "libpthread";
 }
 
-main :: () {}
+// main :: () {}
 
 // Local Variables:
 // compile-command: "jai module.jai"

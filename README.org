@@ -1,9 +1,9 @@
 #+title: README
 
-Jai bindings for SDL3. Work in progress.
+Handmade Jai bindings for SDL3. Work in progress.
 
-In this branch I have attempted to modify the standard bindings to make them easier to work with in Jai programs:
-- Remove SDL_ prefix from all bindings, so module can be imported into an SDL namespace if desired without an ugly duplicated prefix.
+In this branch, I've modified the standard bindings to make them more 'Jai-like':
+- Removed SDL_ prefix from all bindings, so module can be imported into an SDL namespace without an ugly, duplicated prefix.
 - snake_case for all function calls, Upper_Snake_Case for structs/enums.
 - All numeric constants that otherwise behave like enums are now just enums/enum flags. This removes the guesswork when deciding whether or not the unary dot syntax should be used for a particular flag.
 - Removed redundant prefixes from enums for readability.
@@ -13,12 +13,12 @@ In this branch I have attempted to modify the standard bindings to make them eas
   IMG :: #import "SDL3/image";
   #+end_src
 
-If you prefer to work with the standard prefixed bindings, please checkout the 'prefixed' branch; however, I will probably not keep this one up-to-date.
+If you prefer to work with the standard prefixed bindings, please checkout the 'prefixed' branch; however, I probably won't keep this one up-to-date.
 
 * SDL3 source
 - https://github.com/libsdl-org/SDL/tree/main/include/SDL3
 
-SDL3 build commands:
+SDL3 build commands (for Linux):
 #+begin_src
 git clone https://github.com/libsdl-org/SDL
 cd SDL
@@ -41,6 +41,7 @@ cmake --build . --config Release
 #+end_src
 
 * Finished
+- SDL_pixels.jai
 - SDL_image.jai
 - SDL_gpu.jai
 - SDL_timer.jai
@@ -65,7 +66,6 @@ cmake --build . --config Release
 - SDL_joystick.jai
 - SDL_pen.jai
 - SDL_sensor.jai
-- SDL_pixels.jai
 - SDL_stdinc.jai
 - SDL_properties.jai
 - SDL_blendmode.jai
