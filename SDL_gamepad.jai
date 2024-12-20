@@ -84,18 +84,18 @@ Gamepad_Binding_Type :: enum u32
 Gamepad_Binding :: struct
 {
     input_type: Gamepad_Binding_Type;
-    input :: union
+    input: union
     {
         button: s32;
-        axis :: struct {axis, axis_min, axis_max: u32;};
-        hat  :: struct {hat, hat_mask: u32;};
+        axis: struct {axis, axis_min, axis_max: u32;};
+        hat : struct {hat, hat_mask: u32;};
     };
 
     output_type: Gamepad_Binding_Type;
-    output :: union
+    output: union
     {
         button: Gamepad_Button;
-        axis :: struct
+        axis: struct
         {
             axis: Gamepad_Axis;
             axis_min, axis_max: u32;
