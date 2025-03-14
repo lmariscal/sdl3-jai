@@ -81,7 +81,7 @@ Flash_Operation :: enum u32
     FLASH_UNTIL_FOCUSED;
 }
 
-GL_Context       :: void;
+GL_Context       :: *void;
 GL_Context_State :: *GL_Context;
 EGL_Display      :: *void;
 EGL_Config       :: *void;
